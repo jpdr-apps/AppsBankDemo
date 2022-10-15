@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="148mm"
+   viewBox="0 0 210 148"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="bankdemologo.svg"
+   inkscape:export-filename="bankdemofavicon.svg"
+   inkscape:export-xdpi="3.97"
+   inkscape:export-ydpi="3.97"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.51276154"
+     inkscape:cx="356.89104"
+     inkscape:cy="211.59933"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <rect
+       x="204.09448"
+       y="417.8421"
+       width="595.73523"
+       height="351.64929"
+       id="rect117" />
+  </defs>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       transform="matrix(0.56521489,0,0,0.55025015,-113.72062,-142.58417)"
+       id="text115"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:66.6667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect117);display:inline;fill:#ff0000"><tspan
+         x="204.09375"
+         y="478.66385"
+         id="tspan582">BankDemo</tspan></text>
+    <rect
+       style="fill:#ff0000;stroke-width:0.466172"
+       id="rect331"
+       width="18.729702"
+       height="70.563057"
+       x="79.712021"
+       y="-53.008408"
+       transform="rotate(45)" />
+    <rect
+       style="fill:#800000;stroke-width:0.466172"
+       id="rect331-1"
+       width="18.729702"
+       height="70.563057"
+       x="102.73486"
+       y="-76.031235"
+       transform="rotate(45)" />
+    <rect
+       style="fill:#2b0000;stroke-width:0.466172"
+       id="rect331-1-6"
+       width="18.729702"
+       height="70.563057"
+       x="125.75771"
+       y="-99.054062"
+       transform="rotate(45)" />
+  </g>
+</svg>
