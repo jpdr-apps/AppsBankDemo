@@ -1,24 +1,13 @@
 package jpdr.apps.bankdemo.services;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
-import javax.annotation.Resource;
 import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.LocaleResolver;
 
-import jpdr.apps.bankdemo.configuration.properties.BankDemoConfigProperties;
-import jpdr.apps.bankdemo.configuration.utils.LocaleUtils;
 import jpdr.apps.bankdemo.entities.Account;
 import jpdr.apps.bankdemo.entities.Client;
 import jpdr.apps.bankdemo.entities.EntitiesList;

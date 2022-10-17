@@ -1,13 +1,11 @@
 package jpdr.apps.bankdemo.configuration.utils;
 
-import java.text.DateFormat;
+
 import java.text.DecimalFormatSymbols;
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import javax.annotation.Resource;
@@ -38,22 +36,17 @@ public class LocaleUtils {
 	
 	public String getLocalizedDate(String dateValue, HttpServletRequest request) {
 		
-		/*
-		DateFormat dateFormat = new SimpleDateFormat(
-				bankDemoConfigProperties.getDateFormatDB()
-				);
-*/
-		LocalDate localDate = LocalDate.parse(dateValue);
+		if (dateValue != null) {
+			
+			if ( dateValue.equals("") == false ) {
+			
+			LocalDate localDate = LocalDate.parse(dateValue);
+			return localDate.format(DateTimeFormatter.ofPattern(getLocalizedMessage("dateFormatUser",request)));
+			
+			}
+		}
 		
-		
-		/*dateFormat = new SimpleDateFormat(				
-				getLocalizedMessage("dateFormatUser",request)				
-				);
-		
-		return dateFormat.format(calendar.getTime());*/
-
-		return localDate.format(DateTimeFormatter.ofPattern(getLocalizedMessage("dateFormatUser",request)));
-		
+		return "";
 	}
 	
 	public String getLocalizedMessage(String key, HttpServletRequest request) {	
@@ -99,15 +92,24 @@ public class LocaleUtils {
 	
 	public String formatDateForDB(String dateString, HttpServletRequest request) {
 		
-		String currentPattern = getLocalizedMessage("dateFormatUser",request);
+		if ( dateString != null  ) {
+			
+			if ( dateString.equals("") == false ) {
+			
+				String currentPattern = getLocalizedMessage("dateFormatUser",request);
+				
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern(currentPattern);
+				
+				LocalDate localDate = LocalDate.parse(dateString, formatter);
+				
+				formatter = DateTimeFormatter.ofPattern(bankDemoConfigProperties.getDateFormatDB());		
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(currentPattern);
+				return localDate.format(formatter);
 		
-		LocalDate localDate = LocalDate.parse(dateString, formatter);
+			}
+		}
 		
-		formatter = DateTimeFormatter.ofPattern(bankDemoConfigProperties.getDateFormatDB());		
-
-		return localDate.format(formatter);
+		return "";
 		
 	}
 

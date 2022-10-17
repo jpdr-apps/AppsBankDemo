@@ -8,11 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
 
 import jpdr.apps.bankdemo.components.ClientSessionInfo;
 import jpdr.apps.bankdemo.entities.Client;
@@ -329,6 +330,12 @@ public class SettingsController {
 		}		
 		
 	}
-	
+
+	@ExceptionHandler
+	public ModelAndView handleException(Exception ex) {
+				
+		ModelAndView modelAndView = new ModelAndView("/error/errorCommon");
+ 		return modelAndView;
+	}
 
 }

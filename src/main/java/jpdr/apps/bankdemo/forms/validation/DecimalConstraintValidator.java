@@ -35,9 +35,9 @@ public class DecimalConstraintValidator implements ConstraintValidator<ValidateA
 				return false;
 			}
 			if(bigDecimal.subtract(new BigDecimal(integerPart)).toPlainString().length() > fractionalDigits + 2) {
-				System.out.println(new BigDecimal(integerPart).toPlainString());
-				System.out.println(bigDecimal.subtract(new BigDecimal(integerPart)).toPlainString());
-				System.out.println(fractionalDigits+2);
+				//System.out.println(new BigDecimal(integerPart).toPlainString());
+				//System.out.println(bigDecimal.subtract(new BigDecimal(integerPart)).toPlainString());
+				//System.out.println(fractionalDigits+2);
 				return false;
 			}
 		} catch (NumberFormatException nfe) {

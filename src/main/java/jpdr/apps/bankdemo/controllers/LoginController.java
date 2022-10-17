@@ -1,40 +1,36 @@
 package jpdr.apps.bankdemo.controllers;
 
-import java.util.Locale;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.LocaleResolver;
+
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import jpdr.apps.bankdemo.components.ClientSessionInfo;
-import jpdr.apps.bankdemo.configuration.utils.LocaleUtils;
+
 import jpdr.apps.bankdemo.entities.Client;
 import jpdr.apps.bankdemo.entities.ClientSettings;
 import jpdr.apps.bankdemo.forms.LoginForm;
-import jpdr.apps.bankdemo.forms.MyDataForm;
-import jpdr.apps.bankdemo.forms.MyUserAccountForm;
+
 import jpdr.apps.bankdemo.forms.RegisterForm;
 import jpdr.apps.bankdemo.forms.validation.groups.RegisterFormValidationSecuence;
 import jpdr.apps.bankdemo.security.BankDemoUserDetailsService;
-import jpdr.apps.bankdemo.security.ClientsLogin;
+
 import jpdr.apps.bankdemo.services.ClientService;
 import jpdr.apps.bankdemo.services.LocaleService;
 
@@ -74,7 +70,7 @@ public class LoginController {
 		if(authentication!=null) {
 			new SecurityContextLogoutHandler().logout(request, response, authentication);
 		}		
-		return "redirect:/loginBegin";
+		return "redirect:/login";
 	}
 
 	
@@ -165,6 +161,13 @@ public class LoginController {
 		
 	}
 
-*/		 
+*/
+	
+	@ExceptionHandler
+	public ModelAndView handleException(Exception ex) {
+				
+		ModelAndView modelAndView = new ModelAndView("/error/errorCommon");		
+ 		return modelAndView;
+	}
 
 }

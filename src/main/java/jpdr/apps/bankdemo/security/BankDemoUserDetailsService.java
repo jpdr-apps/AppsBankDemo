@@ -1,7 +1,5 @@
 package jpdr.apps.bankdemo.security;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import jpdr.apps.bankdemo.forms.LoginForm;
 import jpdr.apps.bankdemo.forms.MyUserAccountForm;
 import jpdr.apps.bankdemo.forms.RegisterForm;
 

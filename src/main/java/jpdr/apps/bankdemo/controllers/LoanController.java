@@ -1,36 +1,34 @@
 package jpdr.apps.bankdemo.controllers;
 
-import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Locale;
+
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.LocaleResolver;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import jpdr.apps.bankdemo.components.ClientSessionInfo;
 import jpdr.apps.bankdemo.entities.Account;
-import jpdr.apps.bankdemo.entities.Client;
+
 import jpdr.apps.bankdemo.entities.EntitiesList;
 import jpdr.apps.bankdemo.entities.Loan;
 import jpdr.apps.bankdemo.entities.LoanPayment;
-import jpdr.apps.bankdemo.entities.Transaction;
+
 import jpdr.apps.bankdemo.forms.LoanForm;
 import jpdr.apps.bankdemo.forms.LoanFormPaymentsList;
 import jpdr.apps.bankdemo.forms.LoanPayForm;
-import jpdr.apps.bankdemo.forms.PaymentForm;
-import jpdr.apps.bankdemo.forms.TransactionFormEntity;
 import jpdr.apps.bankdemo.forms.validation.AccountValidations;
 import jpdr.apps.bankdemo.services.AccountService;
 import jpdr.apps.bankdemo.services.LoanService;
@@ -180,7 +178,6 @@ public class LoanController {
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 		
  		if (bindingResult.hasErrors()) {
-			System.out.println(bindingResult.getAllErrors());
 			ModelAndView modelAndView = new ModelAndView("/error/error");
 			modelAndView.addObject("loanForm", loanForm); 
 			return modelAndView;
@@ -322,6 +319,14 @@ public class LoanController {
 			return modelAndView;
 		}
 		
+	}
+	
+	@ExceptionHandler
+	public ModelAndView handleException(Exception ex) {
+				
+		ModelAndView modelAndView = new ModelAndView("/error/errorCommon");
+		modelAndView.addObject("activeMenu","loans");
+		return modelAndView;
 	}
 	
 	

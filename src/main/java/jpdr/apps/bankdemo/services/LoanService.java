@@ -1,33 +1,18 @@
 package jpdr.apps.bankdemo.services;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.json.JsonParser;
-import org.springframework.context.MessageSource;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import jpdr.apps.bankdemo.configuration.utils.LocaleUtils;
 import jpdr.apps.bankdemo.entities.Account;
 import jpdr.apps.bankdemo.entities.EntitiesList;
 import jpdr.apps.bankdemo.entities.Loan;
@@ -90,12 +75,15 @@ public class LoanService {
 	public Loan getLoanByNumberWithPayments(int loanNumber) {
 		
 		Loan loan = loanRepository.findByNumber(loanNumber);
-		ArrayList<LoanPayment> loanPayments = loanPaymentsRepository.findAllByLoanId(loan.getId()); 
+		ArrayList<LoanPayment> loanPayments = loanPaymentsRepository.findByLoanPaymentsId_LoanIdOrderByLoanPaymentsId_PaymentIdDesc(
+				loan.getId(),
+				Sort.by("loanPaymentsId.paymentId").ascending()
+				);				
 		loan.setLoanPayments(loanPayments);
 		return loan;
 		
 	}
-	
+			
 	public Loan getLoanByNumberWithOutPayments(int loanNumber) {
 		
 		Loan loan = loanRepository.findByNumber(loanNumber);		
@@ -380,14 +368,14 @@ public class LoanService {
 					new LoanPaymentsId(
 							loan.getId(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getLoandPaymentId()),
-							loanFormPaymentsList.getLoanFormPayments().get(i).getDueDate(),
+							localeService.formatDateForDB(loanFormPaymentsList.getLoanFormPayments().get(i).getDueDate(),request),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getStatus(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getBeginningBalance(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getPaymentAmount(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getPrincipalAmount(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getInterestAmount(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getEndingBalance(),
-							loanFormPaymentsList.getLoanFormPayments().get(i).getPaymentDate(),
+							localeService.formatDateForDB(loanFormPaymentsList.getLoanFormPayments().get(i).getPaymentDate(),request),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getDebitAccountNumber()
 							);			
 			loanPaymentsRepository.save(loanPayment);
@@ -427,7 +415,7 @@ public class LoanService {
 		if (remainingPeriods > 0) {
 			LoanPayment nextloanPayment = loanPaymentsRepository.findFirst1ByLoanPaymentsIdLoanIdAndStatusOrderByLoanPaymentsId(loan.getId(), "ACTIVE");
 			loan.setNextDueDate(nextloanPayment.getDueDate());
-		}else {
+		}else {				
 				loanPayment.setInterestAmount(loan.getBalanceInterest());
 				loanPayment.setPrincipalAmount(loan.getBalancePrincipal());
 				loanPayment.setPaymentAmount(loan.getBalanceTotal());
@@ -443,7 +431,7 @@ public class LoanService {
 		loanPayment.setStatus("PAID");
 		
 		//accountService.addTransaction(account,TransactionConcept.LOAN_DEBIT,loanPayment.getPaymentAmount(), String.valueOf(loanNumber) + " " + String.valueOf(loanPaymentNumber),request);
-		accountService.addTransaction(account,TransactionConcept.LOAN_DEBIT,loanPayment.getPaymentAmount(), "N°: " + String.valueOf(loanNumber) + " - " + String.valueOf(loanPaymentNumber),request);
+		accountService.addTransaction(account,TransactionConcept.LOAN_DEBIT,loanPayment.getPaymentAmount() * -1, "N°: " + String.valueOf(loanNumber) + " - " + String.valueOf(loanPaymentNumber),request);
 		 	
 		loanPaymentsRepository.save(loanPayment);		
 		

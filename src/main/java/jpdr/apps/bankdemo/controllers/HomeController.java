@@ -1,13 +1,10 @@
 package jpdr.apps.bankdemo.controllers;
 
-
-import java.util.Locale;
-
 import javax.annotation.Resource;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -18,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import jpdr.apps.bankdemo.components.ClientSessionInfo;
-import jpdr.apps.bankdemo.entities.Account;
+
 import jpdr.apps.bankdemo.entities.Client;
 import jpdr.apps.bankdemo.entities.ClientSettings;
-import jpdr.apps.bankdemo.entities.EntitiesList;
+
 import jpdr.apps.bankdemo.security.BankDemoUserDetailsService;
 import jpdr.apps.bankdemo.security.ClientsLogin;
 import jpdr.apps.bankdemo.services.AccountService;

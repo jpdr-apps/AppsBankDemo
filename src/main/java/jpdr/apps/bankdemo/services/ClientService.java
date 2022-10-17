@@ -1,11 +1,5 @@
 package jpdr.apps.bankdemo.services;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +7,7 @@ import org.springframework.stereotype.Service;
 import jpdr.apps.bankdemo.configuration.properties.BankDemoConfigProperties;
 import jpdr.apps.bankdemo.entities.Client;
 import jpdr.apps.bankdemo.entities.ClientSettings;
-import jpdr.apps.bankdemo.entities.Transaction;
 import jpdr.apps.bankdemo.forms.RegisterForm;
-import jpdr.apps.bankdemo.forms.SettingsForm;
 import jpdr.apps.bankdemo.repositories.ClientRepository;
 import jpdr.apps.bankdemo.repositories.ClientSettingsRepository;
 

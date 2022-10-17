@@ -2,7 +2,7 @@ package jpdr.apps.bankdemo.repositories;
 
 import java.util.ArrayList;
 
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,7 +13,7 @@ public interface LoanPaymentsRepository extends CrudRepository<LoanPayment, Loan
 	
 	@Query(value = "FROM LoanPayment as a "
 			+ "WHERE a.loanPaymentsId.loanId = ?1" )								
-	public ArrayList<LoanPayment> findAllByLoanId(int loanId);
+	public ArrayList<LoanPayment> findByLoanPaymentsId_LoanIdOrderByLoanPaymentsId_PaymentIdDesc(int loanId, Sort sort);
 
 	/*
 	@Query(value = "FROM LoanPayment as a " 
@@ -23,5 +23,6 @@ public interface LoanPaymentsRepository extends CrudRepository<LoanPayment, Loan
 	public LoanPayment getNextActivePaymentFromLoan(int loanId, Pageable pageable);
 	*/
 	public LoanPayment findFirst1ByLoanPaymentsIdLoanIdAndStatusOrderByLoanPaymentsId(int loanId, String status);
+	
 	
 }

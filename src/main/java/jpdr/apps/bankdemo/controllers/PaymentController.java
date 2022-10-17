@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +21,14 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import jpdr.apps.bankdemo.components.ClientSessionInfo;
-import jpdr.apps.bankdemo.configuration.LocaleConfig;
+
 import jpdr.apps.bankdemo.entities.Account;
 import jpdr.apps.bankdemo.entities.Client;
 import jpdr.apps.bankdemo.entities.EntitiesList;
 import jpdr.apps.bankdemo.entities.Payment;
 import jpdr.apps.bankdemo.forms.PaymentForm;
 import jpdr.apps.bankdemo.services.AccountService;
+import jpdr.apps.bankdemo.services.ClientService;
 import jpdr.apps.bankdemo.services.PaymentService;
 
 @Controller
@@ -37,6 +39,9 @@ public class PaymentController {
 	
 	@Autowired
 	AccountService accountService;
+	
+	@Autowired
+	ClientService clientService;
 
 	HttpSession httpSession;
 	
@@ -135,12 +140,15 @@ public class PaymentController {
 		
 		if (bindingResult.hasErrors()) return new ModelAndView("/error/error");
 		
+		Client client = clientService.getClientById(clientSessionInfo.getClientId());
+		
 		Payment payment = paymentService.addPayment(
 				paymentForm.getOriginAccount(),
+				client.getDocumentId(),
+				client.getFirstName() + " " + client.getLastName(),
 				paymentForm.getDestinationAccount(), 
 				paymentForm.getDestinationDocumentId(),
-				paymentForm.getDestinationFistName() + " " +
-				paymentForm.getDestinationLastName(),
+				paymentForm.getDestinationFistName() + " " + paymentForm.getDestinationLastName(),
 				paymentForm.getAmount(), 
 				paymentForm.getDetails(),
 				request
@@ -161,7 +169,7 @@ public class PaymentController {
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 				
 		EntitiesList<Payment> sentPayments = new EntitiesList<Payment>(paymentService.getSentPaymentsByClient(clientSessionInfo.getClientId()));
-		EntitiesList<Payment> receivedPayments = new EntitiesList<Payment>(paymentService.getRecivedPaymentsByClient(clientSessionInfo.getClientId()));
+		EntitiesList<Payment> receivedPayments = new EntitiesList<Payment>(paymentService.getReceivedPaymentsByClient(clientSessionInfo.getClientId()));
 		
 		int arraySize = sentPayments.getEntities().size();
 		
@@ -198,6 +206,11 @@ public class PaymentController {
 		return modelAndView;
 	}
 	
-	
+	@ExceptionHandler
+	public ModelAndView handleException(Exception ex) {
+				
+		ModelAndView modelAndView = new ModelAndView("/error/errorCommon");
+ 		return modelAndView;
+	}
 
 }

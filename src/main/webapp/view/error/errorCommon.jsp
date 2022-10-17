@@ -22,9 +22,6 @@
 		
 					<span data-feather="x-circle"
 				style="color: #bb0000; width: 100px; height: 100px" /></span>
-			<h5>${exception.getMessage() }</h5>
-		
-				
 			<br>
 				<h6>
 					<fmt:message key = "error.common.message" bundle = "${messageProperties}"/>

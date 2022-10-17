@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "payments")
 public class Payment {
@@ -20,12 +21,16 @@ public class Payment {
 	private String date;
 	@Column(name="origin_account_number")
 	private int originAccountNumber;
+	@Column(name="origin_document_id")
+	private String originDocumentId;
+	@Column(name="origin_full_name")
+	private String originFullName;
 	@Column(name="destination_account_number")
 	private int destinationAccountNumber;	
 	@Column(name="destination_document_id")
 	private String destinationDocumentId;
 	@Column(name="destination_full_name")
-	private String destinationFullName;
+	private String destinationFullName;	
 	@Column(name="amount", precision = 18, scale = 2)
 	private double amount;
 	@Column(name="details")
@@ -33,13 +38,14 @@ public class Payment {
 	
 	public Payment() {}
 
-	
+	public Payment(String date, int originAccountNumber, String originDocumentId, String originFullName,
+			int destinationAccountNumber, String destinationDocumentId, String destinationFullName, double amount,
+			String details) {
 
-	public Payment(String date, int originAccountNumber, int destinationAccountNumber, String destinationDocumentId,
-			String destinationFullName, double amount, String details) {
-		 
 		this.date = date;
 		this.originAccountNumber = originAccountNumber;
+		this.originDocumentId = originDocumentId;
+		this.originFullName = originFullName;
 		this.destinationAccountNumber = destinationAccountNumber;
 		this.destinationDocumentId = destinationDocumentId;
 		this.destinationFullName = destinationFullName;
@@ -117,14 +123,39 @@ public class Payment {
 
 
 
+	public String getOriginDocumentId() {
+		return originDocumentId;
+	}
+
+
+
+	public void setOriginDocumentId(String originDocumentId) {
+		this.originDocumentId = originDocumentId;
+	}
+
+
+
+	public String getOriginFullName() {
+		return originFullName;
+	}
+
+
+
+	public void setOriginFullName(String originFullName) {
+		this.originFullName = originFullName;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Payment [id=" + id + ", date=" + date + ", originAccountNumber=" + originAccountNumber
-				+ ", destinationAccountNumber=" + destinationAccountNumber + ", destinationDocumentId=" + destinationDocumentId
-				+ ", destinationFullName=" + destinationFullName + ", amount=" + amount + ", details=" + details + "]";
+				+ ", originDocumentId=" + originDocumentId + ", originFullName=" + originFullName
+				+ ", destinationAccountNumber=" + destinationAccountNumber + ", destinationDocumentId="
+				+ destinationDocumentId + ", destinationFullName=" + destinationFullName + ", amount=" + amount
+				+ ", details=" + details + "]";
 	}
-
- 
+	
 	
 	
 

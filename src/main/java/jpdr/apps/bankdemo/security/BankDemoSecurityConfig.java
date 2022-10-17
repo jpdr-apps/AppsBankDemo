@@ -43,7 +43,7 @@ public class BankDemoSecurityConfig {
 						"/login/registerResult",
 						"/register",						
 						"/include/**",
-						"/error",
+						"/error",						
 						"/error/error")
 					.permitAll()				
 				.anyRequest()
@@ -58,7 +58,6 @@ public class BankDemoSecurityConfig {
 					.invalidateHttpSession(true)
 					.deleteCookies("JSESSIONID")
 					.permitAll();
-
 		// http.headers().frameOptions().sameOrigin();
 
 		return http.build();
@@ -82,5 +81,5 @@ public class BankDemoSecurityConfig {
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
 		return daoAuthenticationProvider;
 	}
-
+	   
 }

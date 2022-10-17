@@ -1,22 +1,17 @@
 package jpdr.apps.bankdemo.services;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jpdr.apps.bankdemo.configuration.properties.BankDemoConfigProperties;
+
 import jpdr.apps.bankdemo.entities.Account;
-import jpdr.apps.bankdemo.entities.EntitiesList;
+
 import jpdr.apps.bankdemo.entities.Payment;
-import jpdr.apps.bankdemo.entities.Transaction;
+
 import jpdr.apps.bankdemo.entities.TransactionConcept;
 import jpdr.apps.bankdemo.repositories.PaymentRepository;
 import jpdr.apps.bankdemo.services.exceptions.BankDemoException;
@@ -34,7 +29,9 @@ public class PaymentService {
 	private LocaleService localeService;
 
 	public Payment addPayment (			
-			Integer originAccount, 
+			Integer originAccount,
+			String originDocumentId,
+			String originFullName,
 			Integer destinationAccount, 
 			String destinationDocumentId, 
 			String destinationFullName,
@@ -76,6 +73,8 @@ public class PaymentService {
 		Payment payment = new Payment(
 				dateString,
 				originAccount,
+				originDocumentId,
+				originFullName,
 				destinationAccount,
 				destinationDocumentId,
 				destinationFullName,						
@@ -106,7 +105,7 @@ public class PaymentService {
 		
 	}
 	
-	public ArrayList<Payment> getRecivedPaymentsByClient(int clientId){
+	public ArrayList<Payment> getReceivedPaymentsByClient(int clientId){
 		
 		ArrayList<Account> clientAccounts =  (ArrayList<Account>) accountService.getAccounts(clientId).getEntities();		
 		

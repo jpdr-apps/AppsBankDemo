@@ -1,7 +1,5 @@
 package jpdr.apps.bankdemo.forms;
  
-import java.util.TreeMap;
-
 public class SettingsForm {
 	
 	private String language;

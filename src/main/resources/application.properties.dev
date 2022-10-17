@@ -16,11 +16,11 @@ server.error.include-binding-errors=always
 #spring.jpa.show-sql: true
 #DB - POSTGRE
 spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url=jdbc:postgresql://dpg-cd6ti7qen0hqlodboqv0-a/bankdemo
+spring.datasource.url=jdbc:postgresql://192.168.0.135:5432/bankdemo
 spring.datasource.username=juan
 spring.datasource.password=goooLazo_2022
 spring.datasource.driver-class-name=org.postgresql.Driver
-spring.jpa.show-sql: false
+spring.jpa.show-sql: true
 spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.PostgreSQLDialect
 #LOCALIZATION
 bankdemo.properties.dateFormatDB: yyyy-MM-dd
@@ -28,7 +28,7 @@ bankdemo.properties.defaultLanguage: esp
 #SESSION
 server.servlet.session.timeout: 120s
 #SEC
-logging.level.org.springframework.security=INFO
-#logging.level.org.springframework.security=DEBUG
+#logging.level.org.springframework.security=INFO
+logging.level.org.springframework.security=DEBUG
 #server.servlet.session.cookie.http-only=true
 #server.servlet.session.cookie.secure=true

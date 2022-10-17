@@ -15,6 +15,9 @@ import jpdr.apps.bankdemo.forms.validation.ValidateClassLessEqualToDoubleFields;
 public class PaymentForm {
 
 	private int originAccount;	
+	private String originDocumentId;
+	private String originFistName;
+	private String originLastName;
 	private double originAccountBalance;
 	private boolean internalPayment = false;
 	private int destinationAccount;
@@ -116,23 +119,45 @@ public class PaymentForm {
 		this.decimalSeparator = decimalSeparator;
 		
 	}
+	
+	
+
+	public String getOriginDocumentId() {
+		return originDocumentId;
+	}
+
+	public void setOriginDocumentId(String originDocumentId) {
+		this.originDocumentId = originDocumentId;
+	}
+
+	public String getOriginFistName() {
+		return originFistName;
+	}
+
+	public void setOriginFistName(String originFistName) {
+		this.originFistName = originFistName;
+	}
+
+	public String getOriginLastName() {
+		return originLastName;
+	}
+
+	public void setOriginLastName(String originLastName) {
+		this.originLastName = originLastName;
+	}
 
 	@Override
 	public String toString() {
-		return "PaymentForm [originAccount=" + originAccount + ", originAccountBalance=" + originAccountBalance
-				+ ", internalPayment=" + internalPayment + ", destinationAccount=" + destinationAccount
-				+ ", internalAccounts=" + internalAccounts + ", externalAccounts=" + externalAccounts
-				+ ", destinationFistName=" + destinationFistName + ", destinationLastName=" + destinationLastName
-				+ ", destinationDocumentId=" + destinationDocumentId + ", decimalSeparator=" + decimalSeparator
-				+ ", amount=" + amount + ", details=" + details + "]";
+		return "PaymentForm [originAccount=" + originAccount + ", originDocumentId=" + originDocumentId
+				+ ", originFistName=" + originFistName + ", originLastName=" + originLastName
+				+ ", originAccountBalance=" + originAccountBalance + ", internalPayment=" + internalPayment
+				+ ", destinationAccount=" + destinationAccount + ", internalAccounts=" + internalAccounts
+				+ ", externalAccounts=" + externalAccounts + ", destinationFistName=" + destinationFistName
+				+ ", destinationLastName=" + destinationLastName + ", destinationDocumentId=" + destinationDocumentId
+				+ ", decimalSeparator=" + decimalSeparator + ", amount=" + amount + ", details=" + details + "]";
 	}
 
-	 
  
-
-	
- 
-	
 	
 
 }

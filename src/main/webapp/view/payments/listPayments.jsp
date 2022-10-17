@@ -111,20 +111,15 @@
 									</td>
 									<td style="min-width:200px;text-align: left;font-size: 12px;">
 										<span class="form-label fs-6 ">
-											<fmt:message key = "paymentConfirm.originAccountNumber.message" bundle = "${messageProperties}"/>
-										</span>
-									</td>
-									<td style="min-width:150px;text-align: left;font-size: 12px;">
-										<span class="form-label fs-6 ">
 											<fmt:message key = "paymentConfirm.destinationAccountNumber.message" bundle = "${messageProperties}"/>
 										</span>
 									</td>
-									<td style="min-width:150px;text-align: left;font-size: 12px;">
+									<td style="min-width:200px;text-align: left;font-size: 12px;">
 										<span class="form-label fs-6 ">
 											<fmt:message key = "paymentConfirm.beneficiaryDocumentID.message" bundle = "${messageProperties}"/>
 										</span>
 									</td>
-									<td style="min-width:150px;text-align: left;font-size: 12px;">
+									<td style="min-width:200px;text-align: left;font-size: 12px;">
 										<span class="form-label fs-6 ">
 											<fmt:message key = "paymentConfirm.beneficiaryName.message" bundle = "${messageProperties}"/>
 										</span>
@@ -159,25 +154,18 @@
 											<td style="min-width:200px;font-size: 12px;text-align: left;width: 500px;">
 												<span class="form-label fs-6 form-label-td-bd">
 													<small>								
-														${payment.getOriginAccountNumber() }
-													</small>
-												</span>
-											</td>
-											<td style="min-width:150px;font-size: 12px;text-align: left;">
-												<span class="form-label fs-6 form-label-td-bd">
-													<small>
 														${payment.getDestinationAccountNumber() }
 													</small>
 												</span>
 											</td>
-											<td style="min-width:150px;font-size: 12px;text-align: left;">
+											<td style="min-width:200px;font-size: 12px;text-align: left;">
 												<span class="form-label fs-6 form-label-td-bd">
 													<small>
 														${payment.getDestinationDocumentId() }
 													</small>
 												</span>
 											</td>
-											<td style="min-width:150px;font-size: 12px;text-align: left;">
+											<td style="min-width:200px;font-size: 12px;text-align: left;">
 												<span class="form-label fs-6 form-label-td-bd">
 													<small>
 														${payment.getDestinationFullName() }
@@ -205,7 +193,7 @@
 								</c:if>
 								<c:if test="${ sentPayments.getEntities().size() <= 0 }">
 									<tr>
-										<td colspan="4">
+										<td colspan="6">
 											<span class="form-label fs-6 form-label-td-bd">										
 												<fmt:message key = "listPayments.noSentPayments.message" bundle = "${messageProperties}"/>
 											</span>
@@ -247,19 +235,14 @@
 											<fmt:message key = "paymentConfirm.originAccountNumber.message" bundle = "${messageProperties}"/>
 										</span>
 									</td>
-									<td style="min-width:150px;text-align: left;font-size: 12px;">
+									<td style="min-width:200px;text-align: left;font-size: 12px;">
 										<span class="form-label fs-6 ">
-											<fmt:message key = "paymentConfirm.destinationAccountNumber.message" bundle = "${messageProperties}"/>
+											<fmt:message key = "paymentConfirm.sendersDocumentID.message" bundle = "${messageProperties}"/>
 										</span>
 									</td>
-									<td style="min-width:150px;text-align: left;font-size: 12px;">
+									<td style="min-width:200px;text-align: left;font-size: 12px;">
 										<span class="form-label fs-6 ">
-											<fmt:message key = "paymentConfirm.beneficiaryDocumentID.message" bundle = "${messageProperties}"/>
-										</span>
-									</td>
-									<td style="min-width:150px;text-align: left;font-size: 12px;">
-										<span class="form-label fs-6 ">
-											<fmt:message key = "paymentConfirm.beneficiaryName.message" bundle = "${messageProperties}"/>
+											<fmt:message key = "paymentConfirm.sendersName.message" bundle = "${messageProperties}"/>
 										</span>
 									</td>
 									<td style="min-width:200px;text-align: right;font-size: 12px;padding-right: 5em;">
@@ -296,24 +279,17 @@
 													</small>
 												</span>
 											</td>
-											<td style="min-width:150px;font-size: 12px;text-align: left;">
+											<td style="min-width:200px;font-size: 12px;text-align: left;">
 												<span class="form-label fs-6 form-label-td-bd">
 													<small>
-														${payment.getDestinationAccountNumber() }
+														${payment.getOriginDocumentId() }
 													</small>
 												</span>
 											</td>
-											<td style="min-width:150px;font-size: 12px;text-align: left;">
+											<td style="min-width:200px;font-size: 12px;text-align: left;">
 												<span class="form-label fs-6 form-label-td-bd">
 													<small>
-														${payment.getDestinationDocumentId() }
-													</small>
-												</span>
-											</td>
-											<td style="min-width:150px;font-size: 12px;text-align: left;">
-												<span class="form-label fs-6 form-label-td-bd">
-													<small>
-														${payment.getDestinationFullName() }
+														${payment.getOriginFullName() }
 													</small>
 												</span>
 											</td>
@@ -338,7 +314,7 @@
 								</c:if>
 								<c:if test="${ receivedPayments.getEntities().size() <= 0 }">
 									<tr>
-										<td colspan="4">
+										<td colspan="6">
 											<span class="form-label fs-6 form-label-td-bd">										
 												<fmt:message key = "listPayments.noReceivedPayments.message" bundle = "${messageProperties}"/>
 											</span>
