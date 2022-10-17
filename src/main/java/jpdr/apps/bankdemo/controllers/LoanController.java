@@ -162,7 +162,7 @@ public class LoanController {
 					request
 					);
 
-			loanForm.setLoanFormPayments(loanService.getLoanFormPayments(loan.getLoanPayments()));
+			loanForm.setLoanFormPayments(loanService.getLoanFormPayments(loan.getLoanPayments(),request));
 
 			ModelAndView modelAndView = new ModelAndView("/loans/loanConfirm");
 			modelAndView.addObject("activeMenu","loans");
@@ -207,7 +207,7 @@ public class LoanController {
 		Loan loan = loanService.getLoanByNumberWithPayments(loanNumber);
 	
 		LoanForm loanForm = loanService.getLoanForm(loan, request);
-		LoanFormPaymentsList loanFormPaymentsList = loanService.getLoanFormPayments(loan.getLoanPayments());
+		LoanFormPaymentsList loanFormPaymentsList = loanService.getLoanFormPayments(loan.getLoanPayments(),request);
 		
 		ModelAndView modelAndView = new ModelAndView("/loans/listLoanPayments");
 		modelAndView.addObject("activeMenu","loans");

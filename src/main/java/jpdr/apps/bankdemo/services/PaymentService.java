@@ -119,5 +119,9 @@ public class PaymentService {
 		return payments;
 		
 	}
+	
+	public String getLocalizedDate(String date, HttpServletRequest request) {
+		return localeService.getLocalizedDate(date, request);		
+	}
 
 }

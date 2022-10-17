@@ -159,10 +159,32 @@ public class PaymentController {
 	public ModelAndView getPayments(HttpServletRequest request) {
 		
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
-		
-		EntitiesList<Payment> sentPayments = new EntitiesList<Payment>(paymentService.getSentPaymentsByClient(clientSessionInfo.getClientId()));		
+				
+		EntitiesList<Payment> sentPayments = new EntitiesList<Payment>(paymentService.getSentPaymentsByClient(clientSessionInfo.getClientId()));
 		EntitiesList<Payment> receivedPayments = new EntitiesList<Payment>(paymentService.getRecivedPaymentsByClient(clientSessionInfo.getClientId()));
 		
+		int arraySize = sentPayments.getEntities().size();
+		
+		for (int i = 0; i < arraySize ; i ++) {
+			
+			String localizedDate = paymentService.getLocalizedDate(
+					sentPayments.getEntities().get(i).getDate(), 
+					request);
+			sentPayments.getEntities().get(i).setDate(localizedDate);
+			
+		}
+		
+		arraySize = receivedPayments.getEntities().size();
+		
+		for (int i = 0; i < arraySize ; i ++) {
+			
+			String localizedDate = paymentService.getLocalizedDate(
+					receivedPayments.getEntities().get(i).getDate(), 
+					request);
+			receivedPayments.getEntities().get(i).setDate(localizedDate);
+			
+		}
+
 		Locale locale = localeResolver.resolveLocale(request);
 				
 		char decimalSeparator = new DecimalFormatSymbols(locale).getDecimalSeparator();

@@ -323,13 +323,20 @@ public class LoanService {
 		return clientLoans;
 	}
 
-	public LoanFormPaymentsList getLoanFormPayments(ArrayList<LoanPayment> loanPayments) {
+	public LoanFormPaymentsList getLoanFormPayments(ArrayList<LoanPayment> loanPayments,HttpServletRequest request) {
  
 		int loanPaymentsSize = loanPayments.size();
 		
 		ArrayList<LoanFormPayment> loanFormPayments = new ArrayList<LoanFormPayment>();
 		
-		for(int i = 0; i< loanPaymentsSize; i++ ) {		
+		for(int i = 0; i< loanPaymentsSize; i++ ) {
+			
+			String localizedDueDate = localeService.getLocalizedDate(loanPayments.get(i).getDueDate(),request); 
+			String localizedPaymentDate = localeService.getLocalizedDate(loanPayments.get(i).getPaymentDate(),request);
+			
+			loanPayments.get(i).setDueDate(localizedDueDate);
+			loanPayments.get(i).setPaymentDate(localizedPaymentDate);
+			
 			loanFormPayments.add(new LoanFormPayment(loanPayments.get(i)));			
 		}
 		
