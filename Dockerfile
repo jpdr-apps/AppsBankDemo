@@ -11,7 +11,7 @@ WORKDIR /home/juan/app
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
+RUN ["/bin/bash", "-c","./mvnw", "dependency:go-offline"]
 
 COPY src ./src
 
