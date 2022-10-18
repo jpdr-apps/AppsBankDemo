@@ -11,5 +11,8 @@ RUN mvn -f /home/app/pom.xml clean package
 #
 FROM eclipse-temurin:18-jdk-jammy
 COPY --from=build /home/app/target/bankdemo-0.0.3-SNAPSHOT.war /usr/local/lib/bankdemo-0.0.3-SNAPSHOT.war
-EXPOSE 80
+EXPOSE 80/tcp
+EXPOSE 80/udp
+EXPOSE 8080/tcp
+EXPOSE 8080/udp
 ENTRYPOINT ["java","-jar","/usr/local/lib/bankdemo-0.0.3-SNAPSHOT.war"]
