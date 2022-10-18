@@ -11,8 +11,8 @@ WORKDIR /home/juan/app
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN ["/bin/bash", "-c","./mvnw", "dependency:go-offline"]
+RUN ["/bin/bash", "-c","/home/juan/app/mvnw", "dependency:go-offline"]
 
 COPY src ./src
 
-CMD ["./mvnw", "spring-boot:run"]
+CMD ["/home/juan/app/mvnw", "spring-boot:run"]
