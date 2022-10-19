@@ -40,9 +40,9 @@
 
 						<div class="col">
 							<form:input path="username" type="text" class="form-control"
-								id="floatingInput" />
+								id="floatingInputusername" />
 
-							<form:label path="username" for="floatingInput"
+							<form:label path="username" for="floatingInputusername"
 								class="form-label"
 								style="display:block; width:x; height:y; text-align:left;">
 								<fmt:message key="registerForm.username"
@@ -63,9 +63,9 @@
 
 						<div class="col">
 							<form:input path="currentPassword" type="password" class="form-control"
-								id="floatingInput" />
+								id="floatingInputcurrentPassword" />
 
-							<form:label path="currentPassword" for="floatingInput"
+							<form:label path="currentPassword" for="floatingInputcurrentPassword"
 								class="form-label"
 								style="display:block; width:x; height:y; text-align:left;">
 								<fmt:message key="myDataForm.passwordCurrent"

@@ -152,8 +152,8 @@
 							<div class="row">
 								<div class="col">
 									<form:input path="firstName" type="text" class="form-control"
-										id="floatingInput" />
-									<form:label path="firstName" for="floatingInput"
+										id="floatingInputfirstName" />
+									<form:label path="firstName" for="floatingInputfirstName"
 										class="form-label fs-6"
 										style="display:block; width:x; height:y; text-align:left;color:grey!important;">
 										<fmt:message key="registerForm.firstName"
@@ -167,8 +167,8 @@
 								</div>
 								<div class="col">
 									<form:input path="lastName" type="text" class="form-control"
-										id="floatingInput" />
-									<form:label path="lastName" for="floatingInput"
+										id="floatingInputlastName" />
+									<form:label path="lastName" for="floatingInputlastName"
 										class="form-label  fs-6"
 										style="display:block; width:x; height:y; text-align:left;color:grey!important;">
 
@@ -187,9 +187,9 @@
 
 								<div class="col">
 									<form:input path="documentId" type="text" class="form-control"
-										id="floatingInput" />
+										id="floatingInputdocumentId" />
 
-									<form:label path="documentId" for="floatingInput"
+									<form:label path="documentId" for="floatingInputdocumentId"
 										class="form-label fs-6"
 										style="display:block; width:x; height:y; text-align:left;color:grey!important;">
 										<fmt:message key="registerForm.documentId"
@@ -260,9 +260,9 @@
 
 								<div class="col">
 									<form:input path="username" type="text" class="form-control"
-										id="floatingInput" />
+										id="floatingInputusername" />
 
-									<form:label path="username" for="floatingInput"
+									<form:label path="username" for="floatingInputusername"
 										class="form-label fs-6"
 										style="display:block; width:x; height:y; text-align:left;color:grey!important;">
 										<fmt:message key="registerForm.username"
@@ -284,9 +284,9 @@
 
 								<div class="col">
 									<form:input path="currentPassword" type="password"
-										class="form-control" id="floatingInput" />
+										class="form-control" id="floatingInputcurrentPassword" />
 
-									<form:label path="currentPassword" for="floatingInput"
+									<form:label path="currentPassword" for="floatingInputcurrentPassword"
 										class="form-label fs-6"
 										style="display:block; width:x; height:y; text-align:left;color:grey!important;">
 										<fmt:message key="myDataForm.passwordCurrent"

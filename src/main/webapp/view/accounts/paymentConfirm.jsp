@@ -29,7 +29,7 @@
 				modelAttribute="paymentForm">
 
 				<span class="form-label fs-6 ">
-					<fmt:message key = "paymentConfirm.checkDetails.message" bundle = "${messageProperties}"/>:
+					<fmt:message key = "paymentConfirm.checkDetails.message" bundle = "${messageProperties}"/>
 				</span>
 				<br>
 				<br>

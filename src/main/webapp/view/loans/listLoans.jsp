@@ -28,31 +28,7 @@
 		
 		<br>
 		
-		<div class="ps-lg-4 bankdemo-main-accordion">
-			<div >
-				<form id="formBeginLoan" action="/loans/loanBegin" method="post">
-				
-				<button class="btn btn-primary" type="submit" >
-				
-					<span>
-						<fmt:message key="listLoans.getNewLoan.message"
-										bundle="${messageProperties}" />
-					</span> 							
-				
-				</button>
-					<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> 
-				</form>
-			</div>
-		</div>
-		
-		<br>
-		
-		
-
-			
-
-			<c:if test="${ loanForms.getEntities().size() > 0 }">
+				<c:if test="${ loanForms.getEntities().size() > 0 }">
 			<table class="table" style="width: 80%!important;">
 			
 			
@@ -151,6 +127,38 @@
 			</table>
 			
 			</c:if>
+			
+		
+		
+		<br>
+		<br>
+		
+
+			
+
+				
+			
+			<div class="ps-lg-4 bankdemo-main-accordion">
+			<div >
+				<form id="formBeginLoan" action="/loans/loanBegin" method="post">
+				
+				<button class="btn btn-primary" type="submit" >
+				
+					<span>
+						<fmt:message key="listLoans.getNewLoan.message"
+										bundle="${messageProperties}" />
+					</span> 							
+				
+				</button>
+					<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" /> 
+				</form>
+			</div>
+		</div>
+			
+			
+			
+			
 			
 			</main>
 </div>

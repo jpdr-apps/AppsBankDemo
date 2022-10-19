@@ -100,8 +100,8 @@
 				<div class="row">
 					<div class="col">
 						<form:input path="firstName" type="text" class="form-control"
-							id="floatingInput" />
-						<form:label path="firstName" for="floatingInput"
+							id="floatingInputFirstName" />
+						<form:label path="firstName" for="floatingInputFirstName"
 							class="form-label"
 							style="display:block; width:x; height:y; text-align:left;">
 							<fmt:message key = "registerForm.firstName" bundle = "${messageProperties}"/>
@@ -114,8 +114,8 @@
 					</div>
 					<div class="col">
 						<form:input path="lastName" type="text" class="form-control"
-							id="floatingInput" />
-						<form:label path="lastName" for="floatingInput" class="form-label"
+							id="floatingInputLastName" />
+						<form:label path="lastName" for="floatingInputLastName" class="form-label"
 							style="display:block; width:x; height:y; text-align:left;">
 
 						<fmt:message key = "registerForm.lastName" bundle = "${messageProperties}"/>
@@ -132,9 +132,9 @@
 
 					<div class="col">
 						<form:input path="documentId" type="text" class="form-control"
-							id="floatingInput" />
+							id="floatingInputDocumentId" />
 
-						<form:label path="documentId" for="floatingInput"
+						<form:label path="documentId" for="floatingInputDocumentId"
 							class="form-label"
 							style="display:block; width:x; height:y; text-align:left;">				
 							<fmt:message key = "registerForm.documentId" bundle = "${messageProperties}"/>	
@@ -158,9 +158,9 @@
 
 					<div class="col">
 						<form:input path="username" type="text" class="form-control"
-							id="floatingInput" />
+							id="floatingInputUsername" />
 
-						<form:label path="username" for="floatingInput" class="form-label"
+						<form:label path="username" for="floatingInputUsername" class="form-label"
 							style="display:block; width:x; height:y; text-align:left;">
 							<fmt:message key = "registerForm.username" bundle = "${messageProperties}"/>
 							
@@ -235,10 +235,6 @@
 		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
 		integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
-		integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
-		crossorigin="anonymous"></script>
-	<script src="../include/js/dashboard.js"></script>
+	  <script src="../include/js/common.js"></script> 	
 </body>
 </html>

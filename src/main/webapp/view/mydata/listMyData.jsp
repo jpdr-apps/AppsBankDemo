@@ -52,8 +52,8 @@
 					<div class="row">
 						<div class="col">
 							<form:input path="firstName" type="text" class="form-control"
-								id="floatingInput" />
-							<form:label path="firstName" for="floatingInput"
+								id="floatingInputfirstName" />
+							<form:label path="firstName" for="floatingInputfirstName"
 								class="form-label"
 								style="display:block; width:x; height:y; text-align:left;">
 								<fmt:message key="registerForm.firstName"
@@ -67,8 +67,8 @@
 						</div>
 						<div class="col">
 							<form:input path="lastName" type="text" class="form-control"
-								id="floatingInput" />
-							<form:label path="lastName" for="floatingInput"
+								id="floatingInputlastName" />
+							<form:label path="lastName" for="floatingInputlastName"
 								class="form-label"
 								style="display:block; width:x; height:y; text-align:left;">
 
@@ -87,9 +87,9 @@
 
 						<div class="col">
 							<form:input path="documentId" type="text" class="form-control"
-								id="floatingInput" />
+								id="floatingInputdocumentId" />
 
-							<form:label path="documentId" for="floatingInput"
+							<form:label path="documentId" for="floatingInputdocumentId"
 								class="form-label"
 								style="display:block; width:x; height:y; text-align:left;">
 								<fmt:message key="registerForm.documentId"

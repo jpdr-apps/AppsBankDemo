@@ -24,26 +24,6 @@
 		
 		<br>
 
- 		<div class="ps-lg-4 bankdemo-main-accordion">
-			<div >
-					<form id="formOpenAccount" action="/accounts/openAccountConfirm" method="post">
-						<button class="btn btn-primary" type="submit" >
-						<span>
-							<fmt:message key="listAccounts.openNewAccount.message"
-											bundle="${messageProperties}" />
-						</span> 
-						</button>
-						<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" />			
-						<br>			
-					</form>
-				</div>
- 		</div>
-		
-		 
-		<br>
-		<br>	
-		 
 
 		<c:forEach items="${ accounts.getEntities() }" var="account">
 
@@ -130,6 +110,29 @@
 		 
 
 		</c:forEach>
+
+
+		
+		 
+		<br>
+		<br>	
+		 
+ 		<div class="ps-lg-4 bankdemo-main-accordion">
+			<div >
+					<form id="formOpenAccount" action="/accounts/openAccountConfirm" method="post">
+						<button class="btn btn-primary" type="submit" >
+						<span>
+							<fmt:message key="listAccounts.openNewAccount.message"
+											bundle="${messageProperties}" />
+						</span> 
+						</button>
+						<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />			
+						<br>			
+					</form>
+				</div>
+ 		</div>
+
 
 
 
