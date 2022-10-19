@@ -16,7 +16,9 @@
 	<name>AppsBankDemo</name>
 	<description>Bank Demo project for Spring Boot</description>
 	<properties>
-		<java.version>18</java.version>
+		<jib-maven-plugin.version>3.3.0</jib-maven-plugin.version>
+		<docker.image.prefix>bankdemocontainer.azurecr.io</docker.image.prefix>
+		<java.version>18</java.version>		
 	</properties>
 	<dependencies>
 		<dependency>
@@ -179,6 +181,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>jib-maven-plugin</artifactId>
+				<groupId>com.google.cloud.tools</groupId>
+				<version>${jib-maven-plugin.version}</version>
+				<configuration>
+					<from>
+						<image>eclipse-temurin:18-jdk-jammy</image>
+					</from>
+					<to>
+						<image>${docker.image.prefix}/${project.artifactId}</image>
+					</to>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

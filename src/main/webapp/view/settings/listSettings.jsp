@@ -500,7 +500,7 @@
 
 
 
-<script src="http://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/jquery.js"></script>
 
 <script type="text/javascript">
 	$(window).load(function() {
