@@ -15,10 +15,10 @@
 <title><fmt:message key = "forms.registerBegin.pageTitle.message" bundle = "${messageProperties}"/></title>
 
 <link rel="icon" type="image/svg"
-	href="../include/img/bankdemofavicon.svg" />
+	href="/include/img/bankdemofavicon.svg" />
 
-<link href="../include/css/bootstrap.min.css" rel="stylesheet">
-<link href="../include/css/bankdemo.css" rel="stylesheet">
+<link href="/include/css/bootstrap.min.css" rel="stylesheet">
+<link href="/include/css/bankdemo.css" rel="stylesheet">
 
 <style>
 .bd-placeholder-img {
@@ -76,7 +76,7 @@
 
 
 <!-- Custom styles for this template -->
-<link href="../include/css/signin.css" rel="stylesheet">
+<link href="/include/css/signin.css" rel="stylesheet">
 </head>
 
 <body>
@@ -84,7 +84,7 @@
 	<main class="form-signin w-200 m-auto text-center"
 		style="max-width: 600px; width: 600px">
 
-		<img class="mb-4" src="../include/img/bankdemologo.svg" alt="BankDemo"
+		<img class="mb-4" src="/include/img/bankdemologo.svg" alt="BankDemo"
 			width="200" height="100">
 
 		<form:form action="/register" method="post"
@@ -229,12 +229,12 @@
 
 	</main>
 
-	<script src="../include/js/bootstrap.bundle.min.js"></script>
+	<script src="/include/js/bootstrap.bundle.min.js"></script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
 		integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
 		crossorigin="anonymous"></script>
-	  <script src="../include/js/common.js"></script> 	
+	  <script src="/include/js/common.js"></script> 	
 </body>
 </html>

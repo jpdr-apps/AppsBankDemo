@@ -15,7 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><fmt:message key = "header.pageTitle.message" bundle = "${messageProperties}"/></title>
 
-<link rel="icon" type="image/svg" href="../include/img/bankdemofavicon.svg"/>
+<link rel="icon" type="image/svg" href="/include/img/bankdemofavicon.svg"/>
 <link href="/include/css/bootstrap.min.css" rel="stylesheet">
 
 

@@ -16,10 +16,10 @@
 		bundle="${messageProperties}" /></title>
 
 <link rel="icon" type="image/svg"
-	href="../include/img/bankdemofavicon.svg" />
+	href="/include/img/bankdemofavicon.svg" />
 
-<link href="../include/css/bootstrap.min.css" rel="stylesheet">
-<link href="../include/css/bankdemo.css" rel="stylesheet">
+<link href="/include/css/bootstrap.min.css" rel="stylesheet">
+<link href="/include/css/bankdemo.css" rel="stylesheet">
 
 <style>
 .bd-placeholder-img {
@@ -89,7 +89,7 @@
 
 
 <!-- Custom styles for this template -->
-<link href="../include/css/signin.css" rel="stylesheet">
+<link href="/include/css/signin.css" rel="stylesheet">
 </head>
 
 
@@ -114,7 +114,7 @@
 
 		<br> <br> <br>
 		<form action="${loginProcessingUrl}" method="post">
-			<img class="mb-4" src="../include/img/bankdemologo.svg"
+			<img class="mb-4" src="/include/img/bankdemologo.svg"
 				alt="BankDemo" width="200" height="100">
 			<h1 class="h3 mb-3 fw-normal">
 				<fmt:message key="loginBegin.loginToServices.message"
@@ -174,22 +174,22 @@
 				key="forms.register.message" bundle="${messageProperties}" /></a> <br>
 		<br> <br> <span class="fs-6"> <fmt:message
 				key="loginBegin.language.message" bundle="${messageProperties}" />:
-			<a href="/login?lang=esp"><img src="../include/img/lang_es.jpg"
+			<a href="/login?lang=esp"><img src="/include/img/lang_es.jpg"
 				alt="Español"></a> <a href="/login?lang=eng"><img
-				src="../include/img/lang_en.jpg" alt="English"></a>
+				src="/include/img/lang_en.jpg" alt="English"></a>
 		</span>
 
 	</main>
 
 
-	<script src="../include/js/bootstrap.bundle.min.js"></script>
+	<script src="/include/js/bootstrap.bundle.min.js"></script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
 		integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
 		crossorigin="anonymous"></script>
 
-	  <script src="../include/js/common.js"></script> 
+	  <script src="/include/js/common.js"></script> 
 	
 </body>
 </html>

@@ -15,10 +15,10 @@
 <fmt:message key = "forms.registerResult.pageTitle.message" bundle = "${messageProperties}"/>
 </title>
 
-<link rel="icon" type="image/svg" href="../include/img/bankdemofavicon.svg"/>
+<link rel="icon" type="image/svg" href="/include/img/bankdemofavicon.svg"/>
 
-<link href="../include/css/bootstrap.min.css" rel="stylesheet">
-<link href="../include/css/bankdemo.css" rel="stylesheet">
+<link href="/include/css/bootstrap.min.css" rel="stylesheet">
+<link href="/include/css/bankdemo.css" rel="stylesheet">
 
 <style>
 .bd-placeholder-img {
@@ -103,12 +103,12 @@
 					
 	</main>
 
-	<script src="../include/js/bootstrap.bundle.min.js"></script>
+	<script src="/include/js/bootstrap.bundle.min.js"></script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
 		integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
 		crossorigin="anonymous"></script>
-	  <script src="../include/js/common.js"></script> 
+	  <script src="/include/js/common.js"></script> 
 </body>
 </html>

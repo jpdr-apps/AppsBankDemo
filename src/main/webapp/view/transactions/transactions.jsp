@@ -2,7 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<c:import url="../include/header.jsp" />
+<c:import url="/include/header.jsp" />
 
 
 <div>
@@ -16,4 +16,4 @@
 
 
 
-<c:import url="../include/footer.jsp" />
+<c:import url="/include/footer.jsp" />
