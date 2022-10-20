@@ -2,7 +2,6 @@ package jpdr.apps.bankdemo.services;
 
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -11,37 +10,31 @@ import jpdr.apps.bankdemo.configuration.utils.LocaleUtils;
 @Service
 public class LocaleService {
 	
-	//@Resource(name = "bankDemoConfigProperties")
-	//BankDemoConfigProperties bankDemoConfigProperties;
-
 	@Resource(name ="localeUtils")
 	LocaleUtils localeUtils;
 	
-	//@Resource(name = "localeResolver")
-	//LocaleResolver localeResolver;
-
-	public String getLocalizedMessage(String message, HttpServletRequest request) {		
-		return localeUtils.getLocalizedMessage(message, request);
+	public String getLocalizedMessage(String message) {		
+		return localeUtils.getLocalizedMessage(message);
 	}
 
-	public String getLocalizedDate(String date, HttpServletRequest request) {		
-		return localeUtils.getLocalizedDate(date, request);
+	public String getLocalizedDate(String date) {		
+		return localeUtils.getLocalizedDate(date);
 	}
 
 	public String getCurrentDate() {
 		return localeUtils.getCurrentDate();
 	}
 
-	public char getDecimalSeparator(HttpServletRequest request) {		
-		return localeUtils.getDecimalSeparator(request);
+	public char getDecimalSeparator() {		
+		return localeUtils.getDecimalSeparator();
 	}
 
-	public String formatDateForDB(String date, HttpServletRequest request) {		
-		return localeUtils.formatDateForDB(date, request);
+	public String formatDateForDB(String date) {		
+		return localeUtils.formatDateForDB(date);
 	}
 	
-	public String getCurrentLanguage(HttpServletRequest request) {
-		return localeUtils.getCurrentLanguage(request);
+	public String getCurrentLanguage() {
+		return localeUtils.getCurrentLanguage();
 	}
 
 	public void setCurrentLanguage(String language) {

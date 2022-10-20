@@ -150,8 +150,7 @@ public class PaymentController {
 				paymentForm.getDestinationDocumentId(),
 				paymentForm.getDestinationFistName() + " " + paymentForm.getDestinationLastName(),
 				paymentForm.getAmount(), 
-				paymentForm.getDetails(),
-				request
+				paymentForm.getDetails()				
 				);
 		
 		ModelAndView modelAndView = new ModelAndView("/accounts/paymentResults");
@@ -164,7 +163,7 @@ public class PaymentController {
 	
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/payments")
-	public ModelAndView getPayments(HttpServletRequest request) {
+	public ModelAndView getPayments() {
 		
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 				
@@ -176,8 +175,8 @@ public class PaymentController {
 		for (int i = 0; i < arraySize ; i ++) {
 			
 			String localizedDate = paymentService.getLocalizedDate(
-					sentPayments.getEntities().get(i).getDate(), 
-					request);
+					sentPayments.getEntities().get(i).getDate() 
+					);
 			sentPayments.getEntities().get(i).setDate(localizedDate);
 			
 		}
@@ -187,15 +186,12 @@ public class PaymentController {
 		for (int i = 0; i < arraySize ; i ++) {
 			
 			String localizedDate = paymentService.getLocalizedDate(
-					receivedPayments.getEntities().get(i).getDate(), 
-					request);
+					receivedPayments.getEntities().get(i).getDate());
 			receivedPayments.getEntities().get(i).setDate(localizedDate);
 			
 		}
 
-		Locale locale = localeResolver.resolveLocale(request);
-				
-		char decimalSeparator = new DecimalFormatSymbols(locale).getDecimalSeparator();
+		char decimalSeparator = paymentService.getDecimalSeparator();
 				
 		ModelAndView modelAndView = new ModelAndView("/payments/listPayments");
 		modelAndView.addObject("activeMenu","payments");

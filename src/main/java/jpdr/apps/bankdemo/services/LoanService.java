@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import javax.servlet.http.HttpServletRequest;
 
 
 
@@ -91,13 +90,13 @@ public class LoanService {
 		
 	}
 	
-	public LoanForm getLoanForm(Loan loan, HttpServletRequest request) {
+	public LoanForm getLoanForm(Loan loan) {
 		
 		LoanForm loanForm = new LoanForm(
 		loan.getNumber(),
-		localeService.getLocalizedDate(loan.getIssueDate(),request),
+		localeService.getLocalizedDate(loan.getIssueDate()),
 		loan.getStatus(),
-		localeService.getDecimalSeparator(request),
+		localeService.getDecimalSeparator(),
 		loan.getLoanAmount(),
 		loan.getTerm(),
 		loan.getPeriods(),
@@ -107,7 +106,7 @@ public class LoanService {
 		loan.getBalancePrincipal(),		
 		loan.getBalanceTotal(),		
 		loan.getRemainingPeriods(),
-		localeService.getLocalizedDate(loan.getNextDueDate(),request)
+		localeService.getLocalizedDate(loan.getNextDueDate())
 		);
 		return loanForm;
 	}
@@ -263,7 +262,7 @@ public class LoanService {
 		}			
 	}
 
-	public Loan addLoan(int clientId, Loan loan, HttpServletRequest request) {
+	public Loan addLoan(int clientId, Loan loan) {
 
 		int loanNumber = getNextLoanNumber();		
 		loan.setNumber(loanNumber);		
@@ -282,14 +281,13 @@ public class LoanService {
 
 		Account account = accountService.getAccountByNumber(loan.getCreditAccountNumber());
 		
-		//accountService.addTransaction(account, TransactionConcept.LOAN_CREDIT, loan.getLoanAmount(), localeService.getLocalizedMessage("loan", request) +  " " + loan.getNumber(), request);
-		accountService.addTransaction(account, TransactionConcept.LOAN_CREDIT, loan.getLoanAmount(), "N°: " + loan.getNumber(), request);
+		accountService.addTransaction(account, TransactionConcept.LOAN_CREDIT, loan.getLoanAmount(), "N°: " + loan.getNumber());
 		
 		return loan;
 		
 	}
 
-	public EntitiesList<LoanForm> getActiveLoans(int clientId, HttpServletRequest request) {
+	public EntitiesList<LoanForm> getActiveLoans(int clientId) {
 
 		ArrayList<Loan> loans = loanRepository.findAllWithClientIdAndStatus(clientId, "ACTIVE");
 
@@ -300,7 +298,7 @@ public class LoanService {
 			int loansSize = loans.size();
 		
 			for(int i = 0 ; i< loansSize; i++) {				
-				loanForms.add( getLoanForm(loans.get(i), request)  );				
+				loanForms.add( getLoanForm(loans.get(i))  );				
 			}					
 		}
 		
@@ -311,7 +309,7 @@ public class LoanService {
 		return clientLoans;
 	}
 
-	public LoanFormPaymentsList getLoanFormPayments(ArrayList<LoanPayment> loanPayments,HttpServletRequest request) {
+	public LoanFormPaymentsList getLoanFormPayments(ArrayList<LoanPayment> loanPayments) {
  
 		int loanPaymentsSize = loanPayments.size();
 		
@@ -319,8 +317,8 @@ public class LoanService {
 		
 		for(int i = 0; i< loanPaymentsSize; i++ ) {
 			
-			String localizedDueDate = localeService.getLocalizedDate(loanPayments.get(i).getDueDate(),request); 
-			String localizedPaymentDate = localeService.getLocalizedDate(loanPayments.get(i).getPaymentDate(),request);
+			String localizedDueDate = localeService.getLocalizedDate(loanPayments.get(i).getDueDate() ); 
+			String localizedPaymentDate = localeService.getLocalizedDate(loanPayments.get(i).getPaymentDate() );
 			
 			loanPayments.get(i).setDueDate(localizedDueDate);
 			loanPayments.get(i).setPaymentDate(localizedPaymentDate);
@@ -331,10 +329,10 @@ public class LoanService {
 		return new LoanFormPaymentsList(loanFormPayments);
 	}
 
-	public Loan createLoan(int clientId, LoanForm loanForm, HttpServletRequest request) {
+	public Loan createLoan(int clientId, LoanForm loanForm ) {
 		
-		String issueDate = localeService.formatDateForDB(loanForm.getIssueDate(),request);
-		String nextDueDate =  localeService.formatDateForDB(loanForm.getNextDueDate(),request);
+		String issueDate = localeService.formatDateForDB(loanForm.getIssueDate() );
+		String nextDueDate =  localeService.formatDateForDB(loanForm.getNextDueDate() );
 		
 		Loan loan = new Loan(				
 				getNextLoanNumber(),
@@ -368,14 +366,14 @@ public class LoanService {
 					new LoanPaymentsId(
 							loan.getId(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getLoandPaymentId()),
-							localeService.formatDateForDB(loanFormPaymentsList.getLoanFormPayments().get(i).getDueDate(),request),
+							localeService.formatDateForDB(loanFormPaymentsList.getLoanFormPayments().get(i).getDueDate() ),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getStatus(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getBeginningBalance(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getPaymentAmount(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getPrincipalAmount(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getInterestAmount(),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getEndingBalance(),
-							localeService.formatDateForDB(loanFormPaymentsList.getLoanFormPayments().get(i).getPaymentDate(),request),
+							localeService.formatDateForDB(loanFormPaymentsList.getLoanFormPayments().get(i).getPaymentDate() ),
 							loanFormPaymentsList.getLoanFormPayments().get(i).getDebitAccountNumber()
 							);			
 			loanPaymentsRepository.save(loanPayment);
@@ -386,8 +384,8 @@ public class LoanService {
 
 		Account account = accountService.getAccountByNumber(loan.getCreditAccountNumber());
 		
-		//accountService.addTransaction(account, TransactionConcept.LOAN_CREDIT, loan.getLoanAmount(), localeService.getLocalizedMessage("loan", request) +  " " + loan.getNumber(), request);
-		accountService.addTransaction(account, TransactionConcept.LOAN_CREDIT, loan.getLoanAmount(), "N°: "  + loan.getNumber(), request);
+		
+		accountService.addTransaction(account, TransactionConcept.LOAN_CREDIT, loan.getLoanAmount(), "N°: "  + loan.getNumber() );
 		
 		return loan;
 		
@@ -398,7 +396,7 @@ public class LoanService {
 		return loanPaymentsRepository.findFirst1ByLoanPaymentsIdLoanIdAndStatusOrderByLoanPaymentsId(loanId,"ACTIVE");
 	}
 
-	public void payLoanInstallment(int loanNumber, int loanPaymentNumber, int accountNumber, HttpServletRequest request) {
+	public void payLoanInstallment(int loanNumber, int loanPaymentNumber, int accountNumber) {
 
 		Loan loan = loanRepository.findByNumber(loanNumber);
 		
@@ -430,8 +428,7 @@ public class LoanService {
 		loanPayment.setPaymentDate(localeService.getCurrentDate());
 		loanPayment.setStatus("PAID");
 		
-		//accountService.addTransaction(account,TransactionConcept.LOAN_DEBIT,loanPayment.getPaymentAmount(), String.valueOf(loanNumber) + " " + String.valueOf(loanPaymentNumber),request);
-		accountService.addTransaction(account,TransactionConcept.LOAN_DEBIT,loanPayment.getPaymentAmount() * -1, "N°: " + String.valueOf(loanNumber) + " - " + String.valueOf(loanPaymentNumber),request);
+		accountService.addTransaction(account,TransactionConcept.LOAN_DEBIT,loanPayment.getPaymentAmount() * -1, "N°: " + String.valueOf(loanNumber) + " - " + String.valueOf(loanPaymentNumber));
 		 	
 		loanPaymentsRepository.save(loanPayment);		
 		

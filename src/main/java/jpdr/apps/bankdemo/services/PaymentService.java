@@ -1,9 +1,6 @@
 package jpdr.apps.bankdemo.services;
 
 import java.util.ArrayList;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +33,7 @@ public class PaymentService {
 			String destinationDocumentId, 
 			String destinationFullName,
 			double amount,
-			String details,
-			HttpServletRequest request
+			String details			
 			) throws BankDemoException{
 		
 
@@ -49,8 +45,7 @@ public class PaymentService {
 				originAccountEntity, 
 				TransactionConcept.PAYMENT_DEBIT, 
 				amount*-1, 
-				String.valueOf(destinationAccount),
-				request
+				String.valueOf(destinationAccount)				
 				);
 		
 		Account destinationAccountEntity = accountService.getAccountByNumber(destinationAccount); 		
@@ -59,8 +54,7 @@ public class PaymentService {
 				destinationAccountEntity, 
 				TransactionConcept.PAYMENT_CREDIT, 
 				amount, 
-				String.valueOf(originAccount),
-				request
+				String.valueOf(originAccount)				
 				);
 		
 		
@@ -119,8 +113,12 @@ public class PaymentService {
 		
 	}
 	
-	public String getLocalizedDate(String date, HttpServletRequest request) {
-		return localeService.getLocalizedDate(date, request);		
+	public String getLocalizedDate(String date ) {
+		return localeService.getLocalizedDate(date );		
+	}
+	
+	public char getDecimalSeparator() {
+		return localeService.getDecimalSeparator();
 	}
 
 }

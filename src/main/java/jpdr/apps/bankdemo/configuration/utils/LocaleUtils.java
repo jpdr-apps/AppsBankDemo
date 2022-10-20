@@ -39,14 +39,14 @@ public class LocaleUtils {
 	
 	public LocaleUtils() {}
 	
-	public String getLocalizedDate(String dateValue, HttpServletRequest request) {
+	public String getLocalizedDate(String dateValue) {
 		
 		if (dateValue != null) {
 			
 			if ( dateValue.equals("") == false ) {
 			
 			LocalDate localDate = LocalDate.parse(dateValue);
-			return localDate.format(DateTimeFormatter.ofPattern(getLocalizedMessage("dateFormatUser",request)));
+			return localDate.format(DateTimeFormatter.ofPattern(getLocalizedMessage("dateFormatUser")));
 			
 			}
 		}
@@ -54,32 +54,39 @@ public class LocaleUtils {
 		return "";
 	}
 	
-	public String getLocalizedMessage(String key, HttpServletRequest request) {
+	public String getLocalizedMessage(String key) {
 		Locale locale = localeResolver.resolveLocale(httpServletRequest);
 		return messageSource.getMessage(key, null, locale);
 		
 	}
 	
-	public String getCurrentLanguage(HttpServletRequest request) {
+	public String getCurrentLanguage() {
 		Locale locale = localeResolver.resolveLocale(httpServletRequest);
 		return messageSource.getMessage("bankDemo.language.message", null, locale);		
 	}
 	
 	
 	public void setCurrentLanguage(String language) {
-		
-		if(language!=null) {			
-			if(language.equals("esp")) {
-				localeResolver.setLocale(httpServletRequest, httpServletResponse, Locale.forLanguageTag("es-ES"));
-				LocaleContextHolder.setLocale(Locale.forLanguageTag("es-ES"));
-			}else {
-				localeResolver.setLocale(httpServletRequest, httpServletResponse, Locale.US);
-				LocaleContextHolder.setLocale(Locale.US);
+
+		if(language!=null) {		
+
+			switch (language){
+				case "esp": {
+					localeResolver.setLocale(httpServletRequest, httpServletResponse, Locale.forLanguageTag("es-ES"));
+					LocaleContextHolder.setLocale(Locale.forLanguageTag("es-ES"));
+					break;
+				}
+				case "eng": {
+					localeResolver.setLocale(httpServletRequest, httpServletResponse, Locale.US);
+					LocaleContextHolder.setLocale(Locale.US);
+					break;
+				}			
+				default:
+					localeResolver.setLocale(httpServletRequest, httpServletResponse, Locale.forLanguageTag("es-ES"));
+					LocaleContextHolder.setLocale(Locale.forLanguageTag("es-ES"));				
+					break;
 			}
-		}else {
-			localeResolver.setLocale(httpServletRequest, httpServletResponse, Locale.forLanguageTag("es-ES"));
-			LocaleContextHolder.setLocale(Locale.forLanguageTag("es-ES"));
-		}		
+		}
 		
 	}
 	
@@ -95,13 +102,13 @@ public class LocaleUtils {
 		
 	}
 	
-	public String formatDateForDB(String dateString, HttpServletRequest request) {
+	public String formatDateForDB(String dateString) {
 		
 		if ( dateString != null  ) {
 			
 			if ( dateString.equals("") == false ) {
 			
-				String currentPattern = getLocalizedMessage("dateFormatUser",httpServletRequest);
+				String currentPattern = getLocalizedMessage("dateFormatUser");
 				
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern(currentPattern);
 				
@@ -118,7 +125,7 @@ public class LocaleUtils {
 		
 	}
 
-	public char getDecimalSeparator(HttpServletRequest request) {
+	public char getDecimalSeparator() {
 		return new DecimalFormatSymbols(localeResolver.resolveLocale(httpServletRequest)).getDecimalSeparator();
 	}
 	

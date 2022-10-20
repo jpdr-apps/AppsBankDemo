@@ -51,9 +51,7 @@ public class LoginController {
 	
 	@RequestMapping(method = RequestMethod.GET, value="/login")
 	public ModelAndView login(@RequestParam(name = "lang", required = false )  String language) {
-		
-		String param = language != null ? "?lang=" + language : "" ;
-	
+
 		localeService.setCurrentLanguage(language);
 				
 		ModelAndView modelAndView = new ModelAndView("/login/loginBegin");
@@ -85,7 +83,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value="/register")
-	public ModelAndView registerSubmit(@ModelAttribute("registerForm") @Validated(RegisterFormValidationSecuence.class) RegisterForm registerForm ,  BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView registerSubmit(@ModelAttribute("registerForm") @Validated(RegisterFormValidationSecuence.class) RegisterForm registerForm ,  BindingResult bindingResult) {
 		
 		ModelAndView modelAndView = new ModelAndView("/error/error");	
 		
@@ -99,7 +97,7 @@ public class LoginController {
 				
 				bankDemoUserDetailsService.addClient(registerForm,client.getId());
 				
-				ClientSettings clientSettings = new ClientSettings(client.getId(),localeService.getCurrentLanguage(request));
+				ClientSettings clientSettings = new ClientSettings(client.getId(),localeService.getCurrentLanguage());
 				clientService.saveSettings(clientSettings);
 				
 				modelAndView = new ModelAndView("/login/registerResult");						
@@ -109,59 +107,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value="/registerResult")
-	public String registerResult(HttpServletRequest request) {			
+	public String registerResult() {			
 		return "/login/registerResult";
 	}
 	
-	
-	
-/*	
-	@RequestMapping(method = RequestMethod.GET, value = "/myUserAccount")
-	public ModelAndView getMyData() {
-		
-		if (clientSessionInfo == null) return new ModelAndView("/error/error");
-			
-		Client client = clientService.getClientById(clientSessionInfo.getClientId());
-		
-		if(client==null) return new ModelAndView("/error/error");
-		
-		ClientsLogin clientsLogin = bankDemoUserDetailsService.getClientsLoginByClientId(clientSessionInfo.getClientId());
-		
-		if(clientsLogin==null) return new ModelAndView("/error/error");
-		
-		MyUserAccountForm myUserAccountForm = new MyUserAccountForm();
-		myUserAccountForm.setUsername(clientsLogin.getUsername());
-				
-		ModelAndView modelAndView = new ModelAndView("/login/userAccountUpdate");
-		modelAndView.addObject("myUserAccountForm",myUserAccountForm);
-		modelAndView.addObject("showModal",false);
-		return modelAndView;
-	}
-*/	
-/*	
-	@RequestMapping(method = RequestMethod.POST, value = "/myUserAccount")
-	public ModelAndView postMyData(@ModelAttribute("myUserAccountForm") @Validated(RegisterFormValidationSecuence.class) MyUserAccountForm myUserAccountForm ,  BindingResult bindingResult) {
-		
-		if (clientSessionInfo == null) return new ModelAndView("/error/error");
- 		
-		if(bindingResult.hasErrors()) {			
-			ModelAndView modelAndView = new ModelAndView("/login/userAccountUpdate");		
-			modelAndView.addObject("myUserAccountForm",myUserAccountForm);
-			modelAndView.addObject("showModal",false);
-			return modelAndView;
-		}else {			
-
-			bankDemoUserDetailsService.updateClient(myUserAccountForm, clientSessionInfo.getClientId());
-			
-			ModelAndView modelAndView = new ModelAndView("/login/userAccountUpdate");
-			modelAndView.addObject("myUserAccountForm",myUserAccountForm);
-			modelAndView.addObject("showModal",true);
-			return modelAndView;
-		}		
-		
-	}
-
-*/
 	
 	@ExceptionHandler
 	public ModelAndView handleException(Exception ex) {

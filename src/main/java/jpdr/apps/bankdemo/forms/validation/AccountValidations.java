@@ -1,7 +1,5 @@
 package jpdr.apps.bankdemo.forms.validation;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
@@ -20,13 +18,13 @@ public class AccountValidations {
 	@Autowired
 	AccountService accountService;
 	
-	public void validateFunds( int accountNumber, double amount, HttpServletRequest request  ,BindingResult bindingResult) {
+	public void validateFunds( int accountNumber, double amount, BindingResult bindingResult) {
 		
 		Account account = accountService.getAccountByNumber(accountNumber);
 		
 		if ( account.getBalance() < amount ) {
 			bindingResult.addError(
-					new FieldError("LoanPayForm", "debitAccountNumber", localeService.getLocalizedMessage("bankDemoException.NotEnoughFundsAccountException.message", request))
+					new FieldError("LoanPayForm", "debitAccountNumber", localeService.getLocalizedMessage("bankDemoException.NotEnoughFundsAccountException.message"))
 					);	
 		}
 		

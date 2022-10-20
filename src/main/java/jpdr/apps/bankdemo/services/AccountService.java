@@ -3,7 +3,7 @@ package jpdr.apps.bankdemo.services;
 import java.util.ArrayList;
 
 import javax.persistence.Transient;
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,14 +90,9 @@ public class AccountService {
 
 	}
 
-	public Account openAccount(int clientId, HttpServletRequest request) throws BankDemoException {
+	public Account openAccount(int clientId) throws BankDemoException {
 
 		int number = getNextAccountNumber();
-		
-		//Date date = Calendar.getInstance().getTime();
-		////DateFormat dateFormat = new SimpleDateFormat(Transaction.DATE_FORMAT_STRING);
-		//DateFormat dateFormat = new SimpleDateFormat(bankDemoConfigProperties.getDateFormatDB());
-		//String dateString = dateFormat.format(date);
 		
 		String dateString = localeService.getCurrentDate();
 
@@ -106,8 +101,7 @@ public class AccountService {
 
 		clientsProductsService.addProduct(ProductTypes.PRODUCT_TYPE_ACCOUNT, clientId, account.getId());
 		
-		//account = addTransaction(account, TransactionConcept.WELCOME_CREDIT, WELCOME_AMOUNT, localeService.getLocalizedMessage("welcomeToBankdemo", request),request);//"Welcome to BankDemo"
-		account = addTransaction(account, TransactionConcept.WELCOME_CREDIT, WELCOME_AMOUNT, "",request);//"Welcome to BankDemo"
+		account = addTransaction(account, TransactionConcept.WELCOME_CREDIT, WELCOME_AMOUNT, "" );//"Welcome to BankDemo"
 		
 		return account;
 	}
@@ -150,7 +144,7 @@ public class AccountService {
 		return clientService.getClientByProductTypeAndProductId(ProductTypes.PRODUCT_TYPE_ACCOUNT, accountId);
 	}
 
-	public Account addTransaction(Account account, int concept, double amount, String details, HttpServletRequest request) throws BankDemoException {
+	public Account addTransaction(Account account, int concept, double amount, String details ) throws BankDemoException {
 
 		//Date date = Calendar.getInstance().getTime();
 		/////DateFormat dateFormat = new SimpleDateFormat(Transaction.DATE_FORMAT_STRING);
@@ -161,9 +155,9 @@ public class AccountService {
 		
 		Account checkAcount = accountRepository.findById(account.getId()).orElse(null);
 		
-		if(checkAcount==null) throw new NotFoundAccountException(localeService.getLocalizedMessage(NotFoundAccountException.getMessageKey(), request));		
-		if (checkAcount.getStatus().equals("ACTIVE")==false) throw new NotActiveAccountException(localeService.getLocalizedMessage(NotActiveAccountException.getMessageKey(),request));
-		if ((checkAcount.getBalance() + amount) < 0) throw new NotEnoughFundsAccountException(localeService.getLocalizedMessage(NotEnoughFundsAccountException.getMessageKey(),request));
+		if(checkAcount==null) throw new NotFoundAccountException(localeService.getLocalizedMessage(NotFoundAccountException.getMessageKey() ));		
+		if (checkAcount.getStatus().equals("ACTIVE")==false) throw new NotActiveAccountException(localeService.getLocalizedMessage(NotActiveAccountException.getMessageKey() ));
+		if ((checkAcount.getBalance() + amount) < 0) throw new NotEnoughFundsAccountException(localeService.getLocalizedMessage(NotEnoughFundsAccountException.getMessageKey() ));
 		
 		transactionService.addTransaction(dateString, account, concept, amount, details);
 		account.setBalance(account.getBalance() + amount);
@@ -173,17 +167,17 @@ public class AccountService {
 
 	}
 
-	public String getTransactionConcept(int conceptId, HttpServletRequest request) {
+	public String getTransactionConcept(int conceptId ) {
 
 		return transactionService.getTransactionConcept(
 				conceptId,
-				localeService.getLocalizedMessage("bankDemo.language.message",request))
+				localeService.getLocalizedMessage("bankDemo.language.message" ))
 				.getConcept();
 
 	}
 
-	public String getLocalizedDate(String date, HttpServletRequest request) {
-		return localeService.getLocalizedDate(date, request);		
+	public String getLocalizedDate(String date) {
+		return localeService.getLocalizedDate(date );		
 	}
 	
 	

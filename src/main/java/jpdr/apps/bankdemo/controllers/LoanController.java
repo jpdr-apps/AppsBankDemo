@@ -58,11 +58,11 @@ public class LoanController {
 	private AccountValidations accountValidations;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/loans")
-	public ModelAndView getListLoans(HttpServletRequest request) {
+	public ModelAndView getListLoans() {
 
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 		
-		EntitiesList<LoanForm> loanForms = loanService.getActiveLoans(clientSessionInfo.getClientId(), request);
+		EntitiesList<LoanForm> loanForms = loanService.getActiveLoans(clientSessionInfo.getClientId());
 
 		if (loanForms == null)
 			return new ModelAndView("/error/error");
@@ -75,11 +75,11 @@ public class LoanController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/loans/loanBegin")
-	public ModelAndView postLoanBegin(HttpServletRequest request) {
+	public ModelAndView postLoanBegin() {
 
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 		
-		char decimalSeparator = localeService.getDecimalSeparator(request);
+		char decimalSeparator = localeService.getDecimalSeparator();
 
 		ArrayList<String> internalAccounts = new ArrayList<String>();
 
@@ -88,8 +88,7 @@ public class LoanController {
 		}
 
 		if (internalAccounts.size() == 0) {
-			//internalAccounts.add(messageSource.getMessage("noAccounts", null, locale));
-			internalAccounts.add(localeService.getLocalizedMessage("noAccounts", request));
+			internalAccounts.add(localeService.getLocalizedMessage("noAccounts"));
 		}
 
 		LoanForm loanForm = new LoanForm();
@@ -110,7 +109,7 @@ public class LoanController {
 		
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 		
- 		char decimalSeparator = localeService.getDecimalSeparator(request);
+ 		char decimalSeparator = localeService.getDecimalSeparator();
 
 		ArrayList<String> internalAccounts = new ArrayList<String>();
 
@@ -119,7 +118,7 @@ public class LoanController {
 		}
 
 		if (internalAccounts.size() == 0) {
-			internalAccounts.add(localeService.getLocalizedMessage("noAccounts", request));
+			internalAccounts.add(localeService.getLocalizedMessage("noAccounts" ));
 		}
 
 		LoanForm loanForm = new LoanForm();
@@ -138,7 +137,7 @@ public class LoanController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/loans/loanConfirm")
 	public ModelAndView postLoanConfirm(@ModelAttribute("loanForm") @Valid LoanForm loanForm,
-			BindingResult bindingResult, HttpServletRequest request) {
+			BindingResult bindingResult) {
 
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 		
@@ -156,11 +155,10 @@ public class LoanController {
 					loanForm.getCreditAccountNumberAsInteger());
 
 			loanForm = loanService.getLoanForm(
-					loan,					
-					request
+					loan										
 					);
 
-			loanForm.setLoanFormPayments(loanService.getLoanFormPayments(loan.getLoanPayments(),request));
+			loanForm.setLoanFormPayments(loanService.getLoanFormPayments(loan.getLoanPayments() ));
 
 			ModelAndView modelAndView = new ModelAndView("/loans/loanConfirm");
 			modelAndView.addObject("activeMenu","loans");
@@ -172,8 +170,7 @@ public class LoanController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/loans/loanResults")
-	public ModelAndView postLoanResults(@ModelAttribute("loanForm") @Valid LoanForm loanForm, BindingResult bindingResult,
-			HttpServletRequest request) {
+	public ModelAndView postLoanResults(@ModelAttribute("loanForm") @Valid LoanForm loanForm, BindingResult bindingResult) {
 
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 		
@@ -186,7 +183,7 @@ public class LoanController {
 
 			// loan = loanService.addLoan(clientSessionInfo.getClientId(), loan, request);
 
-			Loan loan = loanService.createLoan(clientSessionInfo.getClientId(), loanForm, request);
+			Loan loan = loanService.createLoan(clientSessionInfo.getClientId(), loanForm);
 
 			ModelAndView modelAndView = new ModelAndView("/loans/loanResults");
 			modelAndView.addObject("activeMenu","loans");
@@ -197,14 +194,14 @@ public class LoanController {
 	
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/loans/{loanNumber}/listLoanPayments")
-	public ModelAndView getListLoanPayments(@PathVariable(value = "loanNumber") int loanNumber, HttpServletRequest request) {
+	public ModelAndView getListLoanPayments(@PathVariable(value = "loanNumber") int loanNumber) {
 
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 		
 		Loan loan = loanService.getLoanByNumberWithPayments(loanNumber);
 	
-		LoanForm loanForm = loanService.getLoanForm(loan, request);
-		LoanFormPaymentsList loanFormPaymentsList = loanService.getLoanFormPayments(loan.getLoanPayments(),request);
+		LoanForm loanForm = loanService.getLoanForm(loan);
+		LoanFormPaymentsList loanFormPaymentsList = loanService.getLoanFormPayments(loan.getLoanPayments());
 		
 		ModelAndView modelAndView = new ModelAndView("/loans/listLoanPayments");
 		modelAndView.addObject("activeMenu","loans");
@@ -215,7 +212,7 @@ public class LoanController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/loans/{loanNumber}/loanPayBegin")
-	public ModelAndView getPayLoanBegin(@PathVariable(value = "loanNumber") int loanNumber, HttpServletRequest request) {
+	public ModelAndView getPayLoanBegin(@PathVariable(value = "loanNumber") int loanNumber) {
 	
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 		
@@ -230,13 +227,13 @@ public class LoanController {
 		}
 		
 		if (internalAccounts.size() == 0) {
-			internalAccounts.add(localeService.getLocalizedMessage("noAccounts", request));
+			internalAccounts.add(localeService.getLocalizedMessage("noAccounts"));
 		}
 		
 		LoanPayForm loanPayForm = new LoanPayForm();		
 		loanPayForm.setLoanNumber(loan.getNumber());
 		loanPayForm.setPaymentId(loanPayment.getLoanPaymentsId().getPaymentId());
-		loanPayForm.setDueDate(localeService.getLocalizedDate(loanPayment.getDueDate(),request));				
+		loanPayForm.setDueDate(localeService.getLocalizedDate(loanPayment.getDueDate() ));				
 		if ( loan.getRemainingPeriods() > 1 ) {			
 			loanPayForm.setPaymentAmount(loanPayment.getPaymentAmount());
 		}else {
@@ -250,10 +247,10 @@ public class LoanController {
 		loanPayForm.setInternalAccounts(internalAccounts);
 		loanPayForm.setDebitAccountNumber(0);
 		loanPayForm.setDebitAccountBalance(0);
-		loanPayForm.setPaymentDate(localeService.getLocalizedDate(localeService.getCurrentDate(), request));
+		loanPayForm.setPaymentDate(localeService.getLocalizedDate(localeService.getCurrentDate() ));
 
 		
-		char decimalSeparator = localeService.getDecimalSeparator(request);
+		char decimalSeparator = localeService.getDecimalSeparator();
 		
 		ModelAndView modelAndView = new ModelAndView("/loans/loanPayBegin");
 		modelAndView.addObject("activeMenu","loans");
@@ -296,11 +293,11 @@ public class LoanController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/loans/loanPayResult")
 	public ModelAndView postLoanPayResult(@ModelAttribute("loanPayForm") @Valid LoanPayForm loanPayForm,
-			BindingResult bindingResult, HttpServletRequest request) {
+			BindingResult bindingResult) {
 
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 		
-		accountValidations.validateFunds(loanPayForm.getDebitAccountNumber(), loanPayForm.getPaymentAmount(), request , bindingResult);
+		accountValidations.validateFunds(loanPayForm.getDebitAccountNumber(), loanPayForm.getPaymentAmount() , bindingResult);
 		
 		if (bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView("/loans/loanPayConfirm");
@@ -310,7 +307,7 @@ public class LoanController {
 			
 		} else {
 
-			loanService.payLoanInstallment(loanPayForm.getLoanNumber(), loanPayForm.getPaymentId(), loanPayForm.getDebitAccountNumber() ,request);
+			loanService.payLoanInstallment(loanPayForm.getLoanNumber(), loanPayForm.getPaymentId(), loanPayForm.getDebitAccountNumber());
 			
 			ModelAndView modelAndView = new ModelAndView("/loans/loanPayResult");
 			modelAndView.addObject("activeMenu","loans");

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,11 +69,11 @@ public class AccountController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/accounts/openAccountSubmit")
-	public ModelAndView postOpenAccountSubmit(HttpServletRequest request) throws BankDemoException{
+	public ModelAndView postOpenAccountSubmit() throws BankDemoException{
 
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error");
 		
-		Account account = accountService.openAccount(clientSessionInfo.getClientId(), request);
+		Account account = accountService.openAccount(clientSessionInfo.getClientId());
 
 		if (account == null)
 			return new ModelAndView("/error/error");
@@ -118,7 +117,7 @@ public class AccountController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/accounts/{accountNumber}/listTransactions")
-	public ModelAndView getTransactions(@PathVariable(value = "accountNumber") Integer accountNumber, HttpServletRequest request) {
+	public ModelAndView getTransactions(@PathVariable(value = "accountNumber") Integer accountNumber) {
 
 		if (clientSessionInfo == null || clientSessionInfo.getClientId() == -1)	return new ModelAndView("/error/error"); 	
 		
@@ -131,12 +130,12 @@ public class AccountController {
 		for(int i=0; i<transactionsArraySize;i++) {
 			
 			String localizedConcept = accountService.getTransactionConcept(
-					transactionsArray.get(i).getConceptId(), 
-					request); 
+					transactionsArray.get(i).getConceptId() 
+					); 
 			
 			String localizedDate = accountService.getLocalizedDate(
-					transactionsArray.get(i).getDate(), 
-					request);
+					transactionsArray.get(i).getDate() 
+					);
 
 			transactionsFormEntitiesList.add(
 					new TransactionFormEntity(
