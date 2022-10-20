@@ -22,97 +22,105 @@
 			</div>
 		</div>
 		
-		<br>
-
-
-		<c:forEach items="${ accounts.getEntities() }" var="account">
-
-			<div class="card bankdemo-card card-no-shadow">
-				<div class="card-body">
-
-
-					<div class="container">
-
-						<div class="row justify-content-evenly">
-
-							<div class="col-4" style="width:50%">
-
-								<div>
-										<span class="card-title"
-												style="color: #800000 !important; font-size: 20px !important;">
-										<fmt:message key="account" bundle="${messageProperties}" />
-										 N°: </span>
-										 <br>
-										 <span class="form-label fs-5"> ${ account.getNumber() }</span>
-								</div>
-							</div>
-							<div class="col-4" style="width:50%">
-								<div style="text-align: right!important;">	
-										<span class="card-title"
-												style="color: #800000 !important; font-size: 20px !important; text-align: right!important;">			
-											<fmt:message key="balance" bundle="${messageProperties}" />
-										</span>
-										<br>											
-										<span class="form-label fs-6" style="text-align: right!important;"> $ 
-												<fmt:formatNumber value="${ account.getBalance() }"
-													type="number" minFractionDigits="2"></fmt:formatNumber>
-													 
-										</span>
-								</div>
-							</div>	 
-
-								<div class="btn-group" style="padding-top: 10px;">
-											<a class="btn btn-secondary" href="/accounts/${ account.getNumber() }/listTransactions"
-												> <fmt:message
-													key="listAccounts.transactionHistory.message"
-													bundle="${messageProperties}" />
-											</a>
-				
-				
-											<c:if test="${account.getBalance()>0}">
-												<a  class="btn btn-secondary"  href="/accounts/${ account.getNumber() }/paymentBegin"
-													 > <fmt:message
-														key="listAccounts.newPayment.message"
-														bundle="${messageProperties}" />
-				
-												</a>
-											</c:if>
-											<c:if test="${account.getBalance()<=0}">
-												<a href="/accounts/${ account.getNumber() }/paymentBegin"
-													class="btn btn-secondary disabled"
-													aria-disabled="true"> <fmt:message
-														key="listAccounts.newPayment.message"
-														bundle="${messageProperties}" />
-												</a>
-											</c:if>
-				
-											<a href="/accounts/${ account.getNumber() }/closeAccountConfirm"
-												class="btn btn-secondary"> <fmt:message
-													key="listAccounts.closeAccount.message"
-													bundle="${messageProperties}" />
-											</a>
-								</div>
-
-
-
-
-
-
-
-
-							</div>
-
-						</div>
-					</div>
-
-
-				</div>
-		 
-
-		</c:forEach>
-
-
 		
+
+		<c:if test="${ accounts.getEntities().size() > 0 }">
+
+				<br>
+
+				<c:forEach items="${ accounts.getEntities() }" var="account">
+		
+					<div class="card bankdemo-card card-no-shadow">
+						<div class="card-body">
+		
+		
+							<div class="container">
+		
+								<div class="row justify-content-evenly">
+		
+									<div class="col-4" style="width:50%">
+		
+										<div>
+												<span class="card-title"
+														style="color: #800000 !important; font-size: 20px !important;">
+												<fmt:message key="account" bundle="${messageProperties}" />
+												 N°: </span>
+												 <br>
+												 <span class="form-label fs-5"> ${ account.getNumber() }</span>
+										</div>
+									</div>
+									<div class="col-4" style="width:50%">
+										<div style="text-align: right!important;">	
+												<span class="card-title"
+														style="color: #800000 !important; font-size: 20px !important; text-align: right!important;">			
+													<fmt:message key="balance" bundle="${messageProperties}" />
+												</span>
+												<br>											
+												<span class="form-label fs-6" style="text-align: right!important;"> $ 
+														<fmt:formatNumber value="${ account.getBalance() }"
+															type="number" minFractionDigits="2"></fmt:formatNumber>
+															 
+												</span>
+										</div>
+									</div>	 
+		
+										<div class="btn-group" style="padding-top: 10px;">
+													<a class="btn btn-secondary" href="/accounts/${ account.getNumber() }/listTransactions"
+														> <fmt:message
+															key="listAccounts.transactionHistory.message"
+															bundle="${messageProperties}" />
+													</a>
+						
+						
+													<c:if test="${account.getBalance()>0}">
+														<a  class="btn btn-secondary"  href="/accounts/${ account.getNumber() }/paymentBegin"
+															 > <fmt:message
+																key="listAccounts.newPayment.message"
+																bundle="${messageProperties}" />
+						
+														</a>
+													</c:if>
+													<c:if test="${account.getBalance()<=0}">
+														<a href="/accounts/${ account.getNumber() }/paymentBegin"
+															class="btn btn-secondary disabled"
+															aria-disabled="true"> <fmt:message
+																key="listAccounts.newPayment.message"
+																bundle="${messageProperties}" />
+														</a>
+													</c:if>
+						
+													<a href="/accounts/${ account.getNumber() }/closeAccountConfirm"
+														class="btn btn-secondary"> <fmt:message
+															key="listAccounts.closeAccount.message"
+															bundle="${messageProperties}" />
+													</a>
+										</div>
+		
+		
+		
+		
+		
+		
+		
+		
+									</div>
+		
+								</div>
+							</div>
+		
+		
+						</div>
+				 
+		
+				</c:forEach>
+		
+		</c:if>
+		
+		<c:if test="${ accounts.getEntities().size() <= 0 }">
+				<span class="form-label fs-6 form-label-td-bd">										
+					<fmt:message key = "listAccounts.noAccounts.message" bundle = "${messageProperties}"/>
+				</span>
+		</c:if>
 		 
 		<br>
 		<br>	

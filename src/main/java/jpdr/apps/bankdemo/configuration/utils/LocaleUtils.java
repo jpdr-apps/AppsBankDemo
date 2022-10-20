@@ -10,11 +10,13 @@ import java.util.Locale;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
 
 import jpdr.apps.bankdemo.configuration.properties.BankDemoConfigProperties;
 
@@ -22,12 +24,15 @@ public class LocaleUtils {
 	
 	@Resource(name="messageSource")
 	private MessageSource messageSource;
-	
-	@Resource(name = "localeResolver")
+		
+	@Autowired
 	LocaleResolver localeResolver;
 	
-	@Resource (name = "localeResolver")
-	SessionLocaleResolver sessionLocaleResolver;
+	@Autowired
+	HttpServletRequest httpServletRequest;
+	
+	@Autowired
+	HttpServletResponse httpServletResponse;
 	
 	@Resource(name = "bankDemoConfigProperties")
 	BankDemoConfigProperties bankDemoConfigProperties;
@@ -49,14 +54,14 @@ public class LocaleUtils {
 		return "";
 	}
 	
-	public String getLocalizedMessage(String key, HttpServletRequest request) {	
-		Locale locale = localeResolver.resolveLocale(request);
+	public String getLocalizedMessage(String key, HttpServletRequest request) {
+		Locale locale = localeResolver.resolveLocale(httpServletRequest);
 		return messageSource.getMessage(key, null, locale);
 		
 	}
 	
 	public String getCurrentLanguage(HttpServletRequest request) {
-		Locale locale = localeResolver.resolveLocale(request);
+		Locale locale = localeResolver.resolveLocale(httpServletRequest);
 		return messageSource.getMessage("bankDemo.language.message", null, locale);		
 	}
 	
@@ -65,14 +70,14 @@ public class LocaleUtils {
 		
 		if(language!=null) {			
 			if(language.equals("esp")) {
-				sessionLocaleResolver.setDefaultLocale(Locale.forLanguageTag("es-ES"));
+				localeResolver.setLocale(httpServletRequest, httpServletResponse, Locale.forLanguageTag("es-ES"));
 				LocaleContextHolder.setLocale(Locale.forLanguageTag("es-ES"));
 			}else {
-				sessionLocaleResolver.setDefaultLocale(Locale.US);
+				localeResolver.setLocale(httpServletRequest, httpServletResponse, Locale.US);
 				LocaleContextHolder.setLocale(Locale.US);
 			}
 		}else {
-			sessionLocaleResolver.setDefaultLocale(Locale.forLanguageTag("es-ES"));
+			localeResolver.setLocale(httpServletRequest, httpServletResponse, Locale.forLanguageTag("es-ES"));
 			LocaleContextHolder.setLocale(Locale.forLanguageTag("es-ES"));
 		}		
 		
@@ -96,7 +101,7 @@ public class LocaleUtils {
 			
 			if ( dateString.equals("") == false ) {
 			
-				String currentPattern = getLocalizedMessage("dateFormatUser",request);
+				String currentPattern = getLocalizedMessage("dateFormatUser",httpServletRequest);
 				
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern(currentPattern);
 				
@@ -114,7 +119,7 @@ public class LocaleUtils {
 	}
 
 	public char getDecimalSeparator(HttpServletRequest request) {
-		return new DecimalFormatSymbols(localeResolver.resolveLocale(request)).getDecimalSeparator();
+		return new DecimalFormatSymbols(localeResolver.resolveLocale(httpServletRequest)).getDecimalSeparator();
 	}
 	
 	public String getDefaultLanguage() {

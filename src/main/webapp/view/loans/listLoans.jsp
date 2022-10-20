@@ -26,105 +26,116 @@
 			 </div>
 		</div>
 		
-		<br>
+		
 		
 				<c:if test="${ loanForms.getEntities().size() > 0 }">
-			<table class="table" style="width: 80%!important;">
+					
+					<br>
+							
+							<table class="table" style="width: 80%!important;">
+							
+							
+							
+								<thead>
+									<tr>
+										<td style="width: 100px;"><span class="form-label fs-5 ">N°</span></td>
+										<td style="width: 200px;text-align: right; padding-right: 5em;">
+											<span class="form-label fs-5 ">
+												<fmt:message key="listLoans.balance.message"
+												bundle="${messageProperties}" />
+											</span>
+										</td>
+										<td style="width: 200px;text-align: right; padding-right: 5em;">
+											<span class="form-label fs-5 ">
+												<fmt:message
+													key="listLoans.remaningPayments.message"
+													bundle="${messageProperties}" />
+											</span>
+										</td>
+										<td style="width: 200px;">
+											<span class="form-label fs-5 ">
+											<fmt:message key="listLoans.nextDueDate.message"
+												bundle="${messageProperties}" />
+											</span>
+										</td>
+										<td>
+											<span class="form-label fs-5 ">
+											<fmt:message key="listLoans.actions.message"
+												bundle="${messageProperties}" />
+											</span>
+										</td>
+									</tr>
+								</thead>
+				
+								<tbody>
+				
+									<c:forEach items="${ loanForms.getEntities() }" var="loanForm">
+				
+										<tr>
+											<td class="align-middle">
+												<span class="form-label fs-6 form-label-td-bd">
+													${ loanForm.getNumber() }
+												</span>
+											</td>
+											<td class="align-middle" style="text-align: right; padding-right: 5em;">
+												<span class="form-label fs-6 form-label-td-bd">
+													$ <fmt:formatNumber
+													value="${ loanForm.getBalanceTotal() }" type="number"
+													minFractionDigits="2">
+													</fmt:formatNumber>
+												</span>	
+											</td>
+											<td class="align-middle" style="text-align: right; padding-right: 5em;">
+												<span class="form-label fs-6 form-label-td-bd">
+													${ loanForm.getRemainingPeriods() }
+												</span>
+											</td>
+											<td class="align-middle"> 
+												<span class="form-label fs-6 form-label-td-bd">
+													${ loanForm.getNextDueDate() }
+												</span>
+											</td>
+											<td class="align-middle">
+												<div class="dropdown">							
+														<button class="btn" type="button"
+															id="dropdownMenuButton" data-bs-toggle="dropdown"
+															aria-expanded="false"
+															style="border-style: none;"
+															
+															> 
+																<span
+																data-feather="more-vertical"
+																style="width: 30px; height: 30px; color: #800000 !important; vertical-align: middle !important"></span>
+														</button>
+														<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+															<li><a class="dropdown-item" href="/loans/${ loanForm.getNumber() }/listLoanPayments"><fmt:message
+																key="listLoans.installments.message"
+																bundle="${messageProperties}" /></a></li>
+															<li><a class="dropdown-item" href="/loans/${ loanForm.getNumber() }/loanPayBegin"><fmt:message
+																key="listLoans.payNext.message"
+																bundle="${messageProperties}" /></a></li>
+												 
+														</ul>
+													</div>
+												</td>
+				
+									</tr>
+				
+				
+									</c:forEach>
+				
+								</tbody>
+				
+				
+							</table>
 			
+			</c:if>
 			
+			<c:if test="${ loanForms.getEntities().size() <= 0 }">
 			
-				<thead>
-					<tr>
-						<td style="width: 100px;"><span class="form-label fs-5 ">N°</span></td>
-						<td style="width: 200px;text-align: right; padding-right: 5em;">
-							<span class="form-label fs-5 ">
-								<fmt:message key="listLoans.balance.message"
-								bundle="${messageProperties}" />
-							</span>
-						</td>
-						<td style="width: 200px;text-align: right; padding-right: 5em;">
-							<span class="form-label fs-5 ">
-								<fmt:message
-									key="listLoans.remaningPayments.message"
-									bundle="${messageProperties}" />
-							</span>
-						</td>
-						<td style="width: 200px;">
-							<span class="form-label fs-5 ">
-							<fmt:message key="listLoans.nextDueDate.message"
-								bundle="${messageProperties}" />
-							</span>
-						</td>
-						<td>
-							<span class="form-label fs-5 ">
-							<fmt:message key="listLoans.actions.message"
-								bundle="${messageProperties}" />
-							</span>
-						</td>
-					</tr>
-				</thead>
-
-				<tbody>
-
-					<c:forEach items="${ loanForms.getEntities() }" var="loanForm">
-
-						<tr>
-							<td class="align-middle">
-								<span class="form-label fs-6 form-label-td-bd">
-									${ loanForm.getNumber() }
-								</span>
-							</td>
-							<td class="align-middle" style="text-align: right; padding-right: 5em;">
-								<span class="form-label fs-6 form-label-td-bd">
-									$ <fmt:formatNumber
-									value="${ loanForm.getBalanceTotal() }" type="number"
-									minFractionDigits="2">
-									</fmt:formatNumber>
-								</span>	
-							</td>
-							<td class="align-middle" style="text-align: right; padding-right: 5em;">
-								<span class="form-label fs-6 form-label-td-bd">
-									${ loanForm.getRemainingPeriods() }
-								</span>
-							</td>
-							<td class="align-middle"> 
-								<span class="form-label fs-6 form-label-td-bd">
-									${ loanForm.getNextDueDate() }
-								</span>
-							</td>
-							<td class="align-middle">
-								<div class="dropdown">							
-										<button class="btn" type="button"
-											id="dropdownMenuButton" data-bs-toggle="dropdown"
-											aria-expanded="false"
-											style="border-style: none;"
-											
-											> 
-												<span
-												data-feather="more-vertical"
-												style="width: 30px; height: 30px; color: #800000 !important; vertical-align: middle !important"></span>
-										</button>
-										<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-											<li><a class="dropdown-item" href="/loans/${ loanForm.getNumber() }/listLoanPayments"><fmt:message
-												key="listLoans.installments.message"
-												bundle="${messageProperties}" /></a></li>
-											<li><a class="dropdown-item" href="/loans/${ loanForm.getNumber() }/loanPayBegin"><fmt:message
-												key="listLoans.payNext.message"
-												bundle="${messageProperties}" /></a></li>
-								 
-										</ul>
-									</div>
-								</td>
-
-					</tr>
-
-
-					</c:forEach>
-
-				</tbody>
-
-
-			</table>
+				<span class="form-label fs-6 form-label-td-bd">										
+					<fmt:message key = "listLoans.noLoans.message" bundle = "${messageProperties}"/>
+				</span>
 			
 			</c:if>
 			
